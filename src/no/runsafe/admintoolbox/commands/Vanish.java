@@ -9,7 +9,7 @@ public class Vanish extends PlayerCommand
 {
 	public Vanish()
 	{
-		super("vanish", "Makes you invisible to players.", "runsafe.toolbox.vanish");
+		super("vanish", "Makes you invisible to players.", "runsafe.vanish.vanish");
 	}
 
 	@Override
