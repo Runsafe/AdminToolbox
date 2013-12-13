@@ -1,8 +1,8 @@
 package no.runsafe.admintoolbox.handlers;
 
 import no.runsafe.admintoolbox.events.VanishEvent;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.packets.PacketPlayerInfo;
 
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class VanishHandler
 {
-	public VanishHandler(IOutput output, IServer server)
+	public VanishHandler(IConsole console, IServer server)
 	{
-		this.output = output;
+		this.console = console;
 		this.server = server;
 	}
 
@@ -35,14 +35,14 @@ public class VanishHandler
 		{
 			// Vanish the player.
 			hiddenPlayers.add(player.getName());
-			output.broadcastColoured("%s has disappeared.", player.getPrettyName());
+			console.logInformation("%s has disappeared.", player.getPrettyName());
 			processPlayer(player, true);
 		}
 		else if (!setHidden && isHidden)
 		{
 			// Un-vanish the player.
 			hiddenPlayers.remove(player.getName());
-			output.broadcastColoured("%s has reappeared.", player.getPrettyName());
+			console.logInformation("%s has reappeared.", player.getPrettyName());
 			processPlayer(player, false);
 		}
 	}
@@ -63,7 +63,7 @@ public class VanishHandler
 		return player.hasPermission("runsafe.vanish.see");
 	}
 
-	private final IOutput output;
+	private final IConsole console;
 	private final IServer server;
 	private final List<String> hiddenPlayers = new ArrayList<String>();
 }
