@@ -2,14 +2,20 @@ package no.runsafe.admintoolbox.handlers;
 
 import no.runsafe.admintoolbox.events.VanishEvent;
 import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.event.INetworkEvent;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.internal.Player;
+import no.runsafe.framework.internal.networking.NetworkPacket;
+import no.runsafe.framework.minecraft.event.networking.RunsafeNetworkEvent;
+import no.runsafe.framework.minecraft.event.networking.RunsafeSendPacketEvent;
 import no.runsafe.framework.minecraft.packets.PacketPlayerInfo;
+import no.runsafe.framework.minecraft.packets.PacketType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanishHandler
+public class VanishHandler implements INetworkEvent
 {
 	public VanishHandler(IConsole console, IServer server)
 	{
@@ -61,6 +67,24 @@ public class VanishHandler
 	private boolean playerCanSeeHiddenPlayers(IPlayer player)
 	{
 		return player.hasPermission("runsafe.vanish.see");
+	}
+
+	@Override
+	public void onNetworkEvent(RunsafeNetworkEvent event)
+	{
+		if (event instanceof RunsafeSendPacketEvent)
+		{
+			RunsafeSendPacketEvent sendEvent = (RunsafeSendPacketEvent) event;
+			NetworkPacket packet = sendEvent.getPacket();
+
+			if (packet instanceof PacketPlayerInfo)
+			{
+				PacketPlayerInfo playerInfoPacket = (PacketPlayerInfo) packet;
+				IPlayer listPlayer = Player.Get().getExact(playerInfoPacket.getOriginalPlayerName());
+				if (isHidden(listPlayer, sendEvent.getPlayer()))
+					sendEvent.cancel();
+			}
+		}
 	}
 
 	private final IConsole console;
