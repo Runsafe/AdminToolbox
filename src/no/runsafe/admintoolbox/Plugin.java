@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox;
 
+import no.runsafe.admintoolbox.commands.*;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.log.IDebug;
 
@@ -11,6 +12,11 @@ public class Plugin extends RunsafePlugin
 	protected void PluginSetup()
 	{
 		Debugger = getComponent(IDebug.class);
-		//addComponent(SomeComponent.class);
+
+		addComponent(Author.class);
+		addComponent(Colour.class);
+		addComponent(GiveItem.class);
+		addComponent(RenameItem.class);
+		addComponent(Mode.class);
 	}
 }
