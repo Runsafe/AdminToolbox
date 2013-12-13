@@ -17,3 +17,6 @@ commands:
     aliases: [item, i, give]
   renameitem:
     description: Renames an item in your hand.
+  vanish:
+    description: Makes you invisible to players.
+    aliases: [v]

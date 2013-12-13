@@ -18,5 +18,6 @@ public class Plugin extends RunsafePlugin
 		addComponent(GiveItem.class);
 		addComponent(RenameItem.class);
 		addComponent(Mode.class);
+		addComponent(Vanish.class);
 	}
 }
