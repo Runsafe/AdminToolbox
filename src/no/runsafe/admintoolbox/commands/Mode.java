@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.player.GameMode;
@@ -13,13 +14,14 @@ import java.util.Map;
 
 public class Mode extends ExecutableCommand
 {
-	public Mode(IServer server)
+	public Mode(IServer server, IConsole console)
 	{
 		super(
 				"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
 				new EnumArgument("mode", GameMode.values(), true), new PlayerArgument(false)
 		);
 		this.server = server;
+		this.console = console;
 	}
 
 	@Override
@@ -41,7 +43,9 @@ public class Mode extends ExecutableCommand
 		if (mode == null)
 			return String.format("&c%s is not a recognized game mode!", parameters.get("mode"));
 		mode.apply(target);
-		return this.getGameModeUpdateMessage(target);
+		String feedback = this.getGameModeUpdateMessage(target);
+		console.logInformation(feedback);
+		return feedback;
 	}
 
 	private String getGameModeUpdateMessage(IPlayer target)
@@ -50,5 +54,5 @@ public class Mode extends ExecutableCommand
 	}
 
 	private final IServer server;
+	private final IConsole console;
 }
-
