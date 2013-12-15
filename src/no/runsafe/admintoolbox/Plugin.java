@@ -5,6 +5,8 @@ import no.runsafe.admintoolbox.handlers.Hooks;
 import no.runsafe.admintoolbox.handlers.VanishHandler;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.log.IDebug;
+import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.FrameworkHooks;
 
 public class Plugin extends RunsafePlugin
 {
@@ -13,6 +15,9 @@ public class Plugin extends RunsafePlugin
 	@Override
 	protected void PluginSetup()
 	{
+		addComponent(FrameworkHooks.class);
+		addComponent(Commands.class);
+
 		Debugger = getComponent(IDebug.class);
 
 		addComponent(Hooks.class);
