@@ -13,7 +13,6 @@ public class Plugin extends RunsafePlugin
 	@Override
 	protected void pluginSetup()
 	{
-		addComponent(FrameworkHooks.class);
 		addComponent(Commands.class);
 
 		Debugger = getComponent(IDebug.class);
