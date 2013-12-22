@@ -23,7 +23,7 @@ public class Author extends PlayerCommand
 	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
-		if (item.is(Item.Special.Crafted.WrittenBook))
+		if (item != null && item.is(Item.Special.Crafted.WrittenBook))
 		{
 			String playerName = parameters.get("player");
 			((RunsafeBook) item).setAuthor(playerName);
