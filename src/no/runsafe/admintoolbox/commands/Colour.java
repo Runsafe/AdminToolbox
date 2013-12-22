@@ -23,6 +23,8 @@ public class Colour extends PlayerCommand
 	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
+		if (item == null)
+			return "&cInvalid item.";
 
 		if (item.is(Item.Combat.Leggings.Leather) || item.is(Item.Combat.Boots.Leather) || item.is(Item.Combat.Chestplate.Leather) || item.is(Item.Combat.Helmet.Leather))
 		{
