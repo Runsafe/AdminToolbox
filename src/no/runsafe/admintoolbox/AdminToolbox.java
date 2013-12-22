@@ -6,7 +6,7 @@ import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.FrameworkHooks;
 
-public class Plugin extends RunsafePlugin
+public class AdminToolbox extends RunsafePlugin
 {
 	public static IDebug Debugger = null;
 

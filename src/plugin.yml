@@ -1,5 +1,5 @@
 name: AdminToolbox
-main: no.runsafe.admintoolbox.Plugin
+main: no.runsafe.admintoolbox.AdminToolbox
 version: 1.0.@BUILD@
 authors: []
 depend: []
