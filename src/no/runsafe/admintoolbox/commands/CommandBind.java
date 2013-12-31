@@ -28,7 +28,7 @@ public class CommandBind extends PlayerCommand
 		Item itemType = handItem.getItemType();
 		String commandString = parameters.get("commands");
 
-		if (commandString.length() == 0)
+		if (commandString.equalsIgnoreCase("none"))
 		{
 			handler.removeBinding(executor, itemType);
 			return "&aTool unbound.";
