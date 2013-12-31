@@ -5,6 +5,7 @@ import no.runsafe.admintoolbox.commands.*;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Events;
 import no.runsafe.framework.features.FrameworkHooks;
 
 public class AdminToolbox extends RunsafePlugin
@@ -15,6 +16,7 @@ public class AdminToolbox extends RunsafePlugin
 	protected void pluginSetup()
 	{
 		addComponent(Commands.class);
+		addComponent(Events.class);
 
 		Debugger = getComponent(IDebug.class);
 
