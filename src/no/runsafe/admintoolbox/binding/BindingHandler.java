@@ -14,15 +14,11 @@ public class BindingHandler implements IPlayerRightClick
 	@Override
 	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
-		player.sendColouredMessage("I see you right clicking!");
 		if (usingItem != null)
 		{
-			player.sendColouredMessage("With an item!");
 			CommandBinding binding = getBinding(player, usingItem.getItemType());
 			if (binding != null)
 				binding.execute(player);
-			else
-				player.sendColouredMessage("Item was null.");
 		}
 		return true;
 	}
