@@ -4,28 +4,27 @@ import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.player.GameMode;
 
-import java.util.Map;
-
 public class Mode extends ExecutableCommand
 {
 	public Mode(IServer server, IConsole console)
 	{
 		super(
-				"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
-				new EnumArgument("mode", GameMode.values(), true), new PlayerArgument(false)
+			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
+			new EnumArgument("mode", GameMode.values(), true), new PlayerArgument(false)
 		);
 		this.server = server;
 		this.console = console;
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		if (!(executor instanceof IPlayer) && !parameters.containsKey("player"))
 			return "&cYou need to supply a player for this command when called from the console.";
