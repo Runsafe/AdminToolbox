@@ -1,10 +1,9 @@
 package no.runsafe.admintoolbox.commands;
 
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.command.argument.OnlinePlayerArgument;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
@@ -13,13 +12,12 @@ import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 
 public class GiveItem extends ExecutableCommand
 {
-	public GiveItem(IServer server)
+	public GiveItem()
 	{
 		super(
 			"give", "Give yourself or a player an item", "runsafe.toybox.give",
-			new RequiredArgument("item"), new RequiredArgument("amount"), new PlayerArgument(false)
+			new RequiredArgument("item"), new RequiredArgument("amount"), new OnlinePlayerArgument(false)
 		);
-		this.server = server;
 	}
 
 	@Override
@@ -35,7 +33,7 @@ public class GiveItem extends ExecutableCommand
 		}
 		else
 		{
-			player = server.getPlayer(parameters.get("player"));
+			player = parameters.getPlayer("player");
 			if (player == null)
 				return "&cThat player does not exist.";
 
@@ -79,6 +77,4 @@ public class GiveItem extends ExecutableCommand
 		}
 		player.updateInventory();
 	}
-
-	private final IServer server;
 }
