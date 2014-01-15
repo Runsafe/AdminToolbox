@@ -1,7 +1,7 @@
 package no.runsafe.admintoolbox.commands;
 
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
@@ -14,7 +14,7 @@ public class Author extends PlayerCommand
 	{
 		super(
 			"author", "Changes the author of the book you are holding", "runsafe.toybox.author",
-			new PlayerArgument()
+			new TrailingArgument("author")
 		);
 	}
 
@@ -24,9 +24,9 @@ public class Author extends PlayerCommand
 		RunsafeItemStack item = executor.getItemInHand();
 		if (item != null && item.is(Item.Special.Crafted.WrittenBook))
 		{
-			String playerName = parameters.get("player");
-			((RunsafeBook) item).setAuthor(playerName);
-			return "&2Author changed to " + playerName;
+			String author = parameters.get("author");
+			((RunsafeBook) item).setAuthor(author);
+			return "&2Author changed to " + author;
 		}
 		return "&cYou cannot change the author of that item.";
 	}
