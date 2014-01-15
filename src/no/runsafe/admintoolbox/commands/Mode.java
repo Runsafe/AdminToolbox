@@ -16,7 +16,7 @@ public class Mode extends ExecutableCommand
 	{
 		super(
 			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
-			new EnumArgument("mode", GameMode.values(), true), new OnlinePlayerArgument(false)
+			new EnumArgument("mode", GameMode.values(), true), new OnlinePlayerArgument(false, true)
 		);
 		this.console = console;
 	}
