@@ -5,7 +5,6 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
-import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -23,23 +22,9 @@ public class GiveItem extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IPlayer player;
-		if (!parameters.containsKey("player"))
-		{
-			if (executor instanceof IPlayer)
-				player = (IPlayer) executor;
-			else
-				return "&cYou need to supply a player to give items to.";
-		}
-		else
-		{
-			player = parameters.getPlayer("player");
-			if (player == null)
-				return "&cThat player does not exist.";
-
-			if (player instanceof IAmbiguousPlayer)
-				return player.toString();
-		}
+		IPlayer player = parameters.getPlayer("player");
+		if (player == null)
+			return null;
 
 		RunsafeItemStack item = this.getItemId(parameters.get("item"));
 

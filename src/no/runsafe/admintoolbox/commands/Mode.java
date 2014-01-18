@@ -4,10 +4,8 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.OnlinePlayerArgument;
 import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
 import no.runsafe.framework.api.log.IConsole;
-import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.player.GameMode;
 
@@ -28,14 +26,9 @@ public class Mode extends ExecutableCommand
 		if (!(executor instanceof IPlayer) && !parameters.containsKey("player"))
 			return "&cYou need to supply a player for this command when called from the console.";
 
-		IPlayer target = (parameters.containsKey("player") ? parameters.getPlayer("player") : (IPlayer) executor);
+		IPlayer target = parameters.getPlayer("player");
 		if (target == null)
-			return "Player not found";
-		if (target instanceof IAmbiguousPlayer)
-			return target.toString();
-
-		if (!target.isOnline())
-			return String.format("&cThe player %s is offline.", target.getName());
+			return null;
 
 		GameMode mode = GameMode.search(parameters.get("mode"));
 		if (mode == null)
