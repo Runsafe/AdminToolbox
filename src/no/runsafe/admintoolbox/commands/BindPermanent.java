@@ -29,6 +29,8 @@ public class BindPermanent extends PlayerCommand implements IBranchingExecution
 		String commandString = parameters.get("commands");
 
 		NBTTagCompound tag = handItem.getTagCompound();
+		if (tag == null)
+			tag = new NBTTagCompound();
 		tag.setString("runsafe.bound-commands", commandString);
 		handItem.setTagCompound(tag);
 		return "&aBound!";
