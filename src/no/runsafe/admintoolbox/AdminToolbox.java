@@ -6,7 +6,6 @@ import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.Events;
-import no.runsafe.framework.features.FrameworkHooks;
 
 public class AdminToolbox extends RunsafePlugin
 {
@@ -27,6 +26,7 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(GiveItem.class);
 		addComponent(RenameItem.class);
 		addComponent(Mode.class);
-		addComponent(CommandBind.class);
+		addComponent(Bind.class);
+		addComponent(BindPermanent.class);
 	}
 }

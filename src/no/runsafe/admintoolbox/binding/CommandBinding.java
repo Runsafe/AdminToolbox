@@ -7,6 +7,11 @@ import java.util.List;
 
 public class CommandBinding
 {
+	public CommandBinding(String command)
+	{
+		this.commands = Arrays.asList(command.split("\\\\"));
+	}
+
 	public CommandBinding(String... commands)
 	{
 		this.commands = Arrays.asList(commands);

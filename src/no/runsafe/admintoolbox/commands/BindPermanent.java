@@ -1,19 +1,21 @@
 package no.runsafe.admintoolbox.commands;
 
+import net.minecraft.server.v1_7_R1.NBTTagCompound;
 import no.runsafe.admintoolbox.binding.BindingHandler;
+import no.runsafe.framework.api.command.IBranchingExecution;
 import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.argument.StaticArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
-public class CommandBind extends PlayerCommand
+public class BindPermanent extends PlayerCommand implements IBranchingExecution
 {
-	public CommandBind(BindingHandler handler)
+	public BindPermanent()
 	{
-		super("bind", "Bind a command to an item.", "runsafe.admintoolbox.bind", new TrailingArgument("commands"));
-		this.handler = handler;
+		super("bind", "Bind a command to an item permanently.", "runsafe.admintoolbox.bind.permanent",
+			new StaticArgument("-p"), new TrailingArgument("commands"));
 	}
 
 	@Override
@@ -24,18 +26,11 @@ public class CommandBind extends PlayerCommand
 		if (handItem == null)
 			return "&cYou need to bind to an item";
 
-		Item itemType = handItem.getItemType();
 		String commandString = parameters.get("commands");
 
-		if (commandString.equalsIgnoreCase("none"))
-		{
-			handler.removeBinding(executor, itemType);
-			return "&aTool unbound.";
-		}
-
-		handler.addBinding(executor, itemType, commandString.split("\\\\"));
+		NBTTagCompound tag = handItem.getTagCompound();
+		tag.setString("runsafe.bound-commands", commandString);
+		handItem.setTagCompound(tag);
 		return "&aBound!";
 	}
-
-	private final BindingHandler handler;
 }

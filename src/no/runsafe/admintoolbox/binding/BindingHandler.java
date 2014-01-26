@@ -16,9 +16,18 @@ public class BindingHandler implements IPlayerRightClick
 	{
 		if (usingItem != null)
 		{
-			CommandBinding binding = getBinding(player, usingItem.getItemType());
-			if (binding != null)
-				binding.execute(player);
+			if (usingItem.getTagCompound().hasKey("runsafe.bound-commands"))
+			{
+				new CommandBinding(
+					usingItem.getTagCompound().getString("runsafe.bound-commands")
+				).execute(player);
+			}
+			else
+			{
+				CommandBinding binding = getBinding(player, usingItem.getItemType());
+				if (binding != null)
+					binding.execute(player);
+			}
 		}
 		return true;
 	}
