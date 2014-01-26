@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.binding;
 
+import net.minecraft.server.v1_7_R1.NBTTagCompound;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.player.IPlayerRightClick;
 import no.runsafe.framework.api.player.IPlayer;
@@ -16,7 +17,8 @@ public class BindingHandler implements IPlayerRightClick
 	{
 		if (usingItem != null)
 		{
-			if (usingItem.getTagCompound().hasKey("runsafe.bound-commands"))
+			NBTTagCompound tag = usingItem.getTagCompound();
+			if (tag != null && tag.hasKey("runsafe.bound-commands"))
 			{
 				new CommandBinding(
 					usingItem.getTagCompound().getString("runsafe.bound-commands")
