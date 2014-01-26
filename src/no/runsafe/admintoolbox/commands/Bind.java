@@ -1,7 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
 import no.runsafe.admintoolbox.binding.BindingHandler;
-import no.runsafe.framework.api.command.IBranchingExecution;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -9,7 +8,7 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
-public class Bind extends PlayerCommand implements IBranchingExecution
+public class Bind extends PlayerCommand
 {
 	public Bind(BindingHandler handler)
 	{

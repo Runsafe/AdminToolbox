@@ -19,3 +19,6 @@ commands:
     description: Renames an item in your hand.
   bind:
     description: Allows you to bind commands to a tool.
+  bindpermanent:
+    description: Allows you to bind commands to a tool in a permanent fashion.
+    aliases: [pbind]
