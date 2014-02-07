@@ -28,7 +28,9 @@ public class BindPermanent extends PlayerCommand
 		if (tag == null)
 			tag = new NBTTagCompound();
 		tag.setString("runsafe.bound-commands", commandString);
-		handItem.setTagCompound(tag);
+		// ToDo: Fix this.
+		//handItem.setTagCompound(tag);
+		//handItem.cloneWithNewCompound()
 		return "&aBound!";
 	}
 }
