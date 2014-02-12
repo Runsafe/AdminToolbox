@@ -22,3 +22,6 @@ commands:
   bindpermanent:
     description: Allows you to bind commands to a tool in a permanent fashion.
     aliases: [pbind]
+  addlore:
+    description: Add lore text to an item.
+    aliases: [lore]

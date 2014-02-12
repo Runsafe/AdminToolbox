@@ -28,5 +28,6 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(Mode.class);
 		addComponent(Bind.class);
 		addComponent(BindPermanent.class);
+		addComponent(AddLore.class);
 	}
 }
