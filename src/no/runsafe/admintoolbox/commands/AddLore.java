@@ -6,6 +6,7 @@ import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.text.ChatColour;
 
 public class AddLore extends PlayerCommand
 {
@@ -20,7 +21,7 @@ public class AddLore extends PlayerCommand
 		RunsafeMeta item = executor.getItemInHand();
 		if (item != null && !item.is(Item.Unavailable.Air))
 		{
-			item.addLore(parameters.get("text"));
+			item.addLore(ChatColour.ToMinecraft(parameters.get("text")));
 			return "&eLore text added.";
 		}
 		return "&cInvalid item in hand.";

@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.text.ChatColour;
 
 public class RenameItem extends PlayerCommand
 {
@@ -20,7 +21,7 @@ public class RenameItem extends PlayerCommand
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
-		String name = parameters.get("name");
+		String name = ChatColour.ToMinecraft(parameters.get("name"));
 		item.setDisplayName(name);
 		if (name.equals(item.getDisplayName()))
 			return "&2The item you hold has been renamed.";
