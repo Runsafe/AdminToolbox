@@ -2,10 +2,7 @@ package no.runsafe.admintoolbox;
 
 import no.runsafe.admintoolbox.binding.BindingHandler;
 import no.runsafe.admintoolbox.commands.*;
-import no.runsafe.admintoolbox.commands.kits.CreateKit;
-import no.runsafe.admintoolbox.commands.kits.DeleteKit;
-import no.runsafe.admintoolbox.commands.kits.GetKit;
-import no.runsafe.admintoolbox.commands.kits.GiveKit;
+import no.runsafe.admintoolbox.commands.kits.*;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.admintoolbox.kits.KitRepository;
 import no.runsafe.framework.RunsafePlugin;
@@ -49,5 +46,6 @@ public class AdminToolbox extends RunsafePlugin
 		kitCommand.addSubCommand(getInstance(CreateKit.class));
 		kitCommand.addSubCommand(getInstance(DeleteKit.class));
 		kitCommand.addSubCommand(getInstance(GiveKit.class));
+		kitCommand.addSubCommand(getInstance(ListKits.class));
 	}
 }

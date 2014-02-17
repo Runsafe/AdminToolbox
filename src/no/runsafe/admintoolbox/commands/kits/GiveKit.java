@@ -22,7 +22,7 @@ public class GiveKit extends PlayerCommand
 		if (!handler.kitExists(kitName))
 			return "&cNo such kit exists.";
 
-		if (!executor.hasPermission("runsafe.toolbox.kits.get." + kitName))
+		if (!handler.canUseKit(executor, kitName))
 			return "&cYou do not have permission to give that kit.";
 
 		IPlayer targetPlayer = parameters.getPlayer("player");

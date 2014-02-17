@@ -6,7 +6,9 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class KitHandler implements IServerReady
 {
@@ -46,6 +48,21 @@ public class KitHandler implements IServerReady
 	public boolean kitExists(String kitName)
 	{
 		return kits.containsKey(kitName);
+	}
+
+	public List<String> getAvailableKits(IPlayer player)
+	{
+		List<String> availableKits = new ArrayList<String>(0);
+		for (String kit : kits.keySet())
+			if (canUseKit(player, kit))
+				availableKits.add(kit);
+
+		return availableKits;
+	}
+
+	public boolean canUseKit(IPlayer player, String kitName)
+	{
+		return player.hasPermission("runsafe.toolbox.kits.get." + kitName);
 	}
 
 	private final KitRepository repository;
