@@ -27,3 +27,5 @@ commands:
     aliases: [lore]
   repair:
     description: Repair the item you are holding.
+  kit:
+    description: Kit related commands.
