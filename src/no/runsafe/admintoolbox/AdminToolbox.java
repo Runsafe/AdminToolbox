@@ -6,6 +6,8 @@ import no.runsafe.admintoolbox.commands.kits.CreateKit;
 import no.runsafe.admintoolbox.commands.kits.DeleteKit;
 import no.runsafe.admintoolbox.commands.kits.GetKit;
 import no.runsafe.admintoolbox.commands.kits.GiveKit;
+import no.runsafe.admintoolbox.kits.KitHandler;
+import no.runsafe.admintoolbox.kits.KitRepository;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.log.IDebug;
@@ -36,6 +38,8 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(AddLore.class);
 		addComponent(Repair.class);
 
+		addComponent(KitRepository.class);
+		addComponent(KitHandler.class);
 		Command kitCommand = new Command("kit", "Kit related commands", null);
 		addComponent(kitCommand);
 
