@@ -10,7 +10,7 @@ public class GetKit extends PlayerCommand
 {
 	public GetKit(KitHandler handler)
 	{
-		super("get", "Get a kit", "runsafe.toolbox.kits.get", new RequiredArgument("kit"));
+		super("get", "Get a kit", "runsafe.toolbox.kits.get", new KitArgument(handler));
 		this.handler = handler;
 	}
 

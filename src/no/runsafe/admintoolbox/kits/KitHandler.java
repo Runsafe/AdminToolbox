@@ -62,7 +62,7 @@ public class KitHandler implements IServerReady
 
 	public boolean canUseKit(IPlayer player, String kitName)
 	{
-		return player.hasPermission("runsafe.toolbox.kits.get." + kitName);
+		return player == null || player.hasPermission("runsafe.toolbox.kits.get." + kitName);
 	}
 
 	private final KitRepository repository;
