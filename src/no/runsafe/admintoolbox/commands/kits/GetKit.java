@@ -2,7 +2,6 @@ package no.runsafe.admintoolbox.commands.kits;
 
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 

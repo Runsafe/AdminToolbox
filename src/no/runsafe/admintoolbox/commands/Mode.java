@@ -2,7 +2,7 @@ package no.runsafe.admintoolbox.commands;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
-import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
 import no.runsafe.framework.api.log.IConsole;
@@ -15,7 +15,7 @@ public class Mode extends ExecutableCommand
 	{
 		super(
 			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
-			new EnumArgument("mode", GameMode.values(), true), new SelfOrOnlinePlayer()
+			new Enumeration.Required("mode", GameMode.values()), new SelfOrOnlinePlayer()
 		);
 		this.console = console;
 	}
