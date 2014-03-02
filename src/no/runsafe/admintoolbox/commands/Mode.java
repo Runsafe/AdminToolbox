@@ -4,7 +4,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
+import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.player.GameMode;
@@ -15,7 +15,7 @@ public class Mode extends ExecutableCommand
 	{
 		super(
 			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
-			new Enumeration.Required("mode", GameMode.values()), new SelfOrOnlinePlayer()
+			new Enumeration("mode", GameMode.values()).require(), new Player.Online("player", false, true)
 		);
 		this.console = console;
 	}
@@ -23,16 +23,17 @@ public class Mode extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		if (!(executor instanceof IPlayer) && !parameters.containsKey("player"))
-			return "&cYou need to supply a player for this command when called from the console.";
-
-		IPlayer target = parameters.getPlayer("player");
+		IPlayer target = parameters.getValue("player");
 		if (target == null)
-			return null;
-
-		GameMode mode = GameMode.search(parameters.get("mode"));
+		{
+			if (!(executor instanceof IPlayer))
+				return "&cYou need to supply a player for this command when called from the console.";
+			else
+				target = (IPlayer) executor;
+		}
+		GameMode mode = parameters.getValue("mode");
 		if (mode == null)
-			return String.format("&c%s is not a recognized game mode!", parameters.get("mode"));
+			return null;
 		mode.apply(target);
 		String feedback = this.getGameModeUpdateMessage(target);
 		console.logInformation(feedback);

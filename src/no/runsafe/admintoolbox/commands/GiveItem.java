@@ -3,8 +3,8 @@ package no.runsafe.admintoolbox.commands;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
-import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -15,14 +15,14 @@ public class GiveItem extends ExecutableCommand
 	{
 		super(
 			"give", "Give yourself or a player an item", "runsafe.toybox.give",
-			new RequiredArgument("item"), new RequiredArgument("amount"), new SelfOrOnlinePlayer()
+			new RequiredArgument("item"), new RequiredArgument("amount"), new Player.Online("player", false, true)
 		);
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IPlayer player = parameters.getPlayer("player");
+		IPlayer player = parameters.getValue("player");
 		if (player == null)
 			return null;
 
