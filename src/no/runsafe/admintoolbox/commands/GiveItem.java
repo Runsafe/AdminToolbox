@@ -15,7 +15,7 @@ public class GiveItem extends ExecutableCommand
 	{
 		super(
 			"give", "Give yourself or a player an item", "runsafe.toybox.give",
-			new RequiredArgument("item"), new RequiredArgument("amount"), new Player.Online("player", false, true)
+			new RequiredArgument("item"), new RequiredArgument("amount"), new Player.Online("player", true)
 		);
 	}
 
