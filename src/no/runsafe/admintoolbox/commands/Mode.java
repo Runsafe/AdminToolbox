@@ -15,7 +15,7 @@ public class Mode extends ExecutableCommand
 	{
 		super(
 			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
-			new Enumeration("mode", GameMode.values()).require(), new Player.Online("player", true)
+			new Enumeration("mode", GameMode.values()).require(), new Player().onlineOnly().defaultToExecutor()
 		);
 		this.console = console;
 	}

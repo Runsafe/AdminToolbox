@@ -10,7 +10,7 @@ public class GiveKit extends PlayerCommand
 {
 	public GiveKit(KitHandler handler)
 	{
-		super("give", "Give a kit to another player", "runsafe.toolbox.kits.give", new KitArgument(handler), new Player.Online().require());
+		super("give", "Give a kit to another player", "runsafe.toolbox.kits.give", new KitArgument(handler), new Player().onlineOnly().require());
 		this.handler = handler;
 	}
 

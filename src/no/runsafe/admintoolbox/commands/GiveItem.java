@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -15,7 +16,7 @@ public class GiveItem extends ExecutableCommand
 	{
 		super(
 			"give", "Give yourself or a player an item", "runsafe.toybox.give",
-			new RequiredArgument("item"), new RequiredArgument("amount"), new Player.Online("player", true)
+			new RequiredArgument("item"), new WholeNumber("amount").withDefault(1), new Player().onlineOnly().defaultToExecutor()
 		);
 	}
 
@@ -31,9 +32,9 @@ public class GiveItem extends ExecutableCommand
 		if (item == null)
 			return "&cInvalid item name or ID.";
 
-		int amount = Integer.valueOf(parameters.get("amount"));
+		Integer amount = parameters.getValue("amount");
+		assert (amount != null);
 		this.giveItems(player, item, amount);
-
 		return String.format("&fGave %sx %s to %s&f.", amount, item.getNormalName(), player.getPrettyName());
 	}
 
