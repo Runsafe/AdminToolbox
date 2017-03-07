@@ -1,6 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
-import net.minecraft.server.v1_7_R3.NBTTagCompound;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
