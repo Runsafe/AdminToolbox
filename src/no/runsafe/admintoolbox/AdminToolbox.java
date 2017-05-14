@@ -35,6 +35,7 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(Bind.class);
 		addComponent(BindPermanent.class);
 		addComponent(AddLore.class);
+		addComponent(ClearLore.class);
 		addComponent(Repair.class);
 
 		addComponent(KitRepository.class);

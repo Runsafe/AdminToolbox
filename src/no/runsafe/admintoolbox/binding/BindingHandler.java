@@ -7,7 +7,8 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
-import java.util.HashMap;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
 public class BindingHandler implements IPlayerRightClick
@@ -36,27 +37,27 @@ public class BindingHandler implements IPlayerRightClick
 
 	public void removeBinding(IPlayer player, Item item)
 	{
-		String playerName = player.getName();
-		if (bindings.containsKey(playerName))
-			bindings.get(playerName).remove(item);
+		UUID playerUUID = player.getUniqueId();
+		if (bindings.containsKey(playerUUID))
+			bindings.get(playerUUID).remove(item);
 	}
 
 	public void addBinding(IPlayer player, Item item, String... commands)
 	{
-		String playerName = player.getName();
-		if (!bindings.containsKey(playerName))
-			bindings.put(playerName, new HashMap<Item, CommandBinding>(1));
+		UUID playerUUID = player.getUniqueId();
+		if (!bindings.containsKey(playerUUID))
+			bindings.put(playerUUID, new ConcurrentHashMap<Item, CommandBinding>(1));
 
-		bindings.get(playerName).put(item, new CommandBinding(commands));
+		bindings.get(playerUUID).put(item, new CommandBinding(commands));
 	}
 
 	public CommandBinding getBinding(IPlayer player, Item item)
 	{
-		String playerName = player.getName();
+		UUID playerUUID = player.getUniqueId();
 
-		if (bindings.containsKey(playerName))
+		if (bindings.containsKey(playerUUID))
 		{
-			HashMap<Item, CommandBinding> playerBindings = bindings.get(playerName);
+			ConcurrentHashMap<Item, CommandBinding> playerBindings = bindings.get(playerUUID);
 			for (Map.Entry<Item, CommandBinding> node : playerBindings.entrySet())
 				if (node.getKey().equals(item))
 					return node.getValue();
@@ -65,5 +66,5 @@ public class BindingHandler implements IPlayerRightClick
 		return null;
 	}
 
-	private final HashMap<String, HashMap<Item, CommandBinding>> bindings = new HashMap<String, HashMap<Item, CommandBinding>>(0);
+	private final ConcurrentHashMap<UUID, ConcurrentHashMap<Item, CommandBinding>> bindings = new ConcurrentHashMap<UUID, ConcurrentHashMap<Item, CommandBinding>>(0);
 }

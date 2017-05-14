@@ -25,6 +25,8 @@ commands:
   addlore:
     description: Add lore text to an item.
     aliases: [lore]
+  clearlore:
+    description: Clears an item's lore.
   repair:
     description: Repair the item you are holding.
   kit:
