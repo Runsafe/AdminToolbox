@@ -27,7 +27,7 @@ public class GiveItem extends ExecutableCommand
 		if (player == null)
 			return null;
 
-		RunsafeItemStack item = this.getItemId(parameters.get("item"));
+		RunsafeItemStack item = this.getItemId((String) parameters.getValue("item"));
 
 		if (item == null)
 			return "&cInvalid item name or ID.";
