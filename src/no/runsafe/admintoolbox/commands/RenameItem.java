@@ -21,7 +21,7 @@ public class RenameItem extends PlayerCommand
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
-		String name = ChatColour.ToMinecraft(parameters.get("name"));
+		String name = ChatColour.ToMinecraft((String) parameters.getValue("name"));
 		item.setDisplayName(name);
 		if (name.equals(item.getDisplayName()))
 			return "&2The item you hold has been renamed.";

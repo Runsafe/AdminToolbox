@@ -25,7 +25,7 @@ public class Bind extends PlayerCommand
 			return "&cYou need to bind to an item";
 
 		Item itemType = handItem.getItemType();
-		String commandString = parameters.get("commands");
+		String commandString = parameters.getValue("commands");
 
 		if (commandString.equalsIgnoreCase("none"))
 		{

@@ -28,10 +28,10 @@ public class Colour extends PlayerCommand
 		if (item.is(Item.Combat.Leggings.Leather) || item.is(Item.Combat.Boots.Leather) || item.is(Item.Combat.Chestplate.Leather) || item.is(Item.Combat.Helmet.Leather))
 		{
 			RunsafeLeatherArmor armor = (RunsafeLeatherArmor) item;
-			if (parameters.get("hex").equals("random"))
+			if (parameters.getValue("hex").equals("random"))
 				((RunsafeLeatherArmor) item).RandomColour();
 			else
-				armor.setColor(Integer.valueOf(parameters.get("hex"), 16));
+				armor.setColor(Integer.valueOf((String) parameters.getValue("hex"), 16));
 			return "&2Coloured!";
 		}
 		return "&cYou cannot colour that item.";

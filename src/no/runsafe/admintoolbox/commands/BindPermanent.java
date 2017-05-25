@@ -22,7 +22,7 @@ public class BindPermanent extends PlayerCommand
 		if (handItem == null)
 			return "&cYou need to bind to an item";
 
-		String commandString = parameters.get("commands");
+		String commandString = parameters.getValue("commands");
 
 		NBTTagCompound tag = handItem.getTagCompound();
 		if (tag == null)

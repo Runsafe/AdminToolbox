@@ -16,7 +16,7 @@ public class GetKit extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String kitName = parameters.get("kit");
+		String kitName = parameters.getValue("kit");
 		if (!handler.kitExists(kitName))
 			return "&cNo such kit exists.";
 

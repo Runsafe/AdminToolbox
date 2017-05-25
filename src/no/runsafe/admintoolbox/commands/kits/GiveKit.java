@@ -17,7 +17,7 @@ public class GiveKit extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String kitName = parameters.get("kit");
+		String kitName = parameters.getValue("kit");
 		if (!handler.canUseKit(executor, kitName))
 			return "&cYou do not have permission to give that kit.";
 
