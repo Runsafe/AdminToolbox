@@ -10,7 +10,8 @@ public class ClearLore extends PlayerCommand
 {
 	public ClearLore()
 	{
-		super("clearlore",
+		super(
+			"clearlore",
 			"Clears all lore from an item.",
 			"runsafe.toolbox.lore"
 		);

@@ -12,7 +12,12 @@ public class Bind extends PlayerCommand
 {
 	public Bind(BindingHandler handler)
 	{
-		super("bind", "Bind a command to an item type.", "runsafe.admintoolbox.bind.temporary", new TrailingArgument("commands"));
+		super(
+			"bind",
+			"Bind a command to an item type.",
+			"runsafe.admintoolbox.bind.temporary",
+			new TrailingArgument("commands")
+		);
 		this.handler = handler;
 	}
 

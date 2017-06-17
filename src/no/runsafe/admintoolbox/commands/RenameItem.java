@@ -11,7 +11,12 @@ public class RenameItem extends PlayerCommand
 {
 	public RenameItem()
 	{
-		super("renameitem", "Renames the item you are holding", "runsafe.toybox.rename", new TrailingArgument("name"));
+		super(
+			"renameitem",
+			"Renames the item you are holding",
+			"runsafe.toybox.rename",
+			new TrailingArgument("name")
+		);
 	}
 
 	@Override

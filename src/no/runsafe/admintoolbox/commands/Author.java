@@ -14,7 +14,9 @@ public class Author extends PlayerCommand
 	public Author()
 	{
 		super(
-			"author", "Changes the author of the book you are holding", "runsafe.toybox.author",
+			"author",
+			"Changes the author of the book you are holding",
+			"runsafe.toybox.author",
 			new TrailingArgument("author")
 		);
 	}

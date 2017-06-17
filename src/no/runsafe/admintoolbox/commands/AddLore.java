@@ -12,7 +12,12 @@ public class AddLore extends PlayerCommand
 {
 	public AddLore()
 	{
-		super("addlore", "Adds lore text to an item", "runsafe.toolbox.lore", new TrailingArgument("text"));
+		super(
+			"addlore",
+			"Adds lore text to an item",
+			"runsafe.toolbox.lore",
+			new TrailingArgument("text")
+		);
 	}
 
 	@Override

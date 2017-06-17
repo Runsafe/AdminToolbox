@@ -11,7 +11,12 @@ public class BindPermanent extends PlayerCommand
 {
 	public BindPermanent()
 	{
-		super("bindpermanent", "Bind a command to an item permanently.", "runsafe.admintoolbox.bind.permanent", new TrailingArgument("commands"));
+		super(
+			"bindpermanent",
+			"Bind a command to an item permanently.",
+			"runsafe.admintoolbox.bind.permanent",
+			new TrailingArgument("commands")
+		);
 	}
 
 	@Override

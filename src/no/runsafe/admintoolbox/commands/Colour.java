@@ -13,7 +13,9 @@ public class Colour extends PlayerCommand
 	public Colour()
 	{
 		super(
-			"colour", "Colours an item you are holding.", "runsafe.toybox.colour",
+			"colour",
+			"Colours an item you are holding.",
+			"runsafe.toybox.colour",
 			new RequiredArgument("hex")
 		);
 	}

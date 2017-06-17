@@ -12,7 +12,12 @@ public class CreateKit extends PlayerCommand
 {
 	public CreateKit(KitHandler handler)
 	{
-		super("create", "Create a kit", "runsafe.toolbox.kits.create", new RequiredArgument("kit"));
+		super(
+			"create",
+			"Create a kit",
+			"runsafe.toolbox.kits.create",
+			new RequiredArgument("kit")
+		);
 		this.handler = handler;
 	}
 

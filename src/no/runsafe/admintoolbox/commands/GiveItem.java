@@ -15,8 +15,12 @@ public class GiveItem extends ExecutableCommand
 	public GiveItem()
 	{
 		super(
-			"give", "Give yourself or a player an item", "runsafe.toybox.give",
-			new RequiredArgument("item"), new WholeNumber("amount").withDefault(1), new Player().onlineOnly().defaultToExecutor()
+			"give",
+			"Give yourself or a player an item",
+			"runsafe.toybox.give",
+			new RequiredArgument("item"),
+			new WholeNumber("amount").withDefault(1),
+			new Player().onlineOnly().defaultToExecutor()
 		);
 	}
 

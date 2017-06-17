@@ -14,8 +14,11 @@ public class Mode extends ExecutableCommand
 	public Mode(IConsole console)
 	{
 		super(
-			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
-			new Enumeration("mode", GameMode.values()).require(), new Player().onlineOnly().defaultToExecutor()
+			"mode",
+			"Changes the game-mode of the player",
+			"runsafe.toybox.mode",
+			new Enumeration("mode", GameMode.values()).require(),
+			new Player().onlineOnly().defaultToExecutor()
 		);
 		this.console = console;
 	}
