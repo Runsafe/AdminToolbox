@@ -12,7 +12,11 @@ public class ListKits extends PlayerCommand
 {
 	public ListKits(KitHandler handler)
 	{
-		super("list", "List all kits available to you", "runsafe.toolbox.kits.list");
+		super(
+			"list",
+			"List all kits available to you",
+			"runsafe.toolbox.kits.list"
+		);
 		this.handler = handler;
 	}
 

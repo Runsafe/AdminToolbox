@@ -9,7 +9,11 @@ public class Repair extends PlayerCommand
 {
 	public Repair()
 	{
-		super("repair", "Repair the item you are holding", "runsafe.toolbox.repair");
+		super(
+			"repair",
+			"Repair the item you are holding",
+			"runsafe.toolbox.repair"
+		);
 	}
 
 	@Override

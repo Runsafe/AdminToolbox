@@ -38,7 +38,7 @@ public class KitRepository extends Repository
 
 	public HashMap<String, RunsafeInventory> getKits()
 	{
-		HashMap<String, RunsafeInventory> kits = new HashMap<String, RunsafeInventory>(0);
+		HashMap<String, RunsafeInventory> kits = new HashMap<>(0);
 
 		for (IRow row : database.query("SELECT `ID`, `inventory` FROM `toolbox_kits`"))
 		{

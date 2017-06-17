@@ -11,7 +11,12 @@ public class RenameItem extends PlayerCommand
 {
 	public RenameItem()
 	{
-		super("renameitem", "Renames the item you are holding", "runsafe.toybox.rename", new TrailingArgument("name"));
+		super(
+			"renameitem",
+			"Renames the item you are holding",
+			"runsafe.toybox.rename",
+			new TrailingArgument("name")
+		);
 	}
 
 	@Override
@@ -21,7 +26,7 @@ public class RenameItem extends PlayerCommand
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
-		String name = ChatColour.ToMinecraft((String) parameters.getValue("name"));
+		String name = ChatColour.ToMinecraft(parameters.getValue("name"));
 		item.setDisplayName(name);
 		if (name.equals(item.getDisplayName()))
 			return "&2The item you hold has been renamed.";

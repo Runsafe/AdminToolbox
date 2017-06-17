@@ -52,7 +52,7 @@ public class KitHandler implements IServerReady
 
 	public List<String> getAvailableKits(IPlayer player)
 	{
-		List<String> availableKits = new ArrayList<String>(0);
+		List<String> availableKits = new ArrayList<>(0);
 		for (String kit : kits.keySet())
 			if (canUseKit(player, kit))
 				availableKits.add(kit);
@@ -67,5 +67,5 @@ public class KitHandler implements IServerReady
 
 	private final KitRepository repository;
 	private final IServer server;
-	private HashMap<String, RunsafeInventory> kits = new HashMap<String, RunsafeInventory>(0);
+	private HashMap<String, RunsafeInventory> kits = new HashMap<>(0);
 }

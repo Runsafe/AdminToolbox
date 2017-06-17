@@ -10,7 +10,12 @@ public class DeleteKit extends PlayerCommand
 {
 	public DeleteKit(KitHandler handler)
 	{
-		super("delete", "Delete a kit", "runsafe.toolbox.kits.delete", new RequiredArgument("kit"));
+		super(
+			"delete",
+			"Delete a kit",
+			"runsafe.toolbox.kits.delete",
+			new RequiredArgument("kit")
+		);
 		this.handler = handler;
 	}
 

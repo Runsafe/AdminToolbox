@@ -13,7 +13,9 @@ public class Colour extends PlayerCommand
 	public Colour()
 	{
 		super(
-			"colour", "Colours an item you are holding.", "runsafe.toybox.colour",
+			"colour",
+			"Colours an item you are holding.",
+			"runsafe.toybox.colour",
 			new RequiredArgument("hex")
 		);
 	}
@@ -31,7 +33,7 @@ public class Colour extends PlayerCommand
 			if (parameters.getValue("hex").equals("random"))
 				((RunsafeLeatherArmor) item).RandomColour();
 			else
-				armor.setColor(Integer.valueOf((String) parameters.getValue("hex"), 16));
+				armor.setColor(Integer.valueOf(parameters.getValue("hex"), 16));
 			return "&2Coloured!";
 		}
 		return "&cYou cannot colour that item.";
