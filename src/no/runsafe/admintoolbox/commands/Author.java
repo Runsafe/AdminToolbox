@@ -27,7 +27,7 @@ public class Author extends PlayerCommand
 		RunsafeItemStack item = executor.getItemInHand();
 		if (item != null && item.is(Item.Special.Crafted.WrittenBook))
 		{
-			String author = ChatColour.ToMinecraft((String) parameters.getValue("author"));
+			String author = ChatColour.ToMinecraft(parameters.getValue("author"));
 			((RunsafeBook) item).setAuthor(author);
 			return "&2Author changed to " + author;
 		}

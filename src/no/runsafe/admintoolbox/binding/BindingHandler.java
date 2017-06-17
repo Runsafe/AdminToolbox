@@ -46,7 +46,7 @@ public class BindingHandler implements IPlayerRightClick
 	{
 		UUID playerUUID = player.getUniqueId();
 		if (!bindings.containsKey(playerUUID))
-			bindings.put(playerUUID, new ConcurrentHashMap<Item, CommandBinding>(1));
+			bindings.put(playerUUID, new ConcurrentHashMap<>(1));
 
 		bindings.get(playerUUID).put(item, new CommandBinding(commands));
 	}
@@ -66,5 +66,5 @@ public class BindingHandler implements IPlayerRightClick
 		return null;
 	}
 
-	private final ConcurrentHashMap<UUID, ConcurrentHashMap<Item, CommandBinding>> bindings = new ConcurrentHashMap<UUID, ConcurrentHashMap<Item, CommandBinding>>(0);
+	private final ConcurrentHashMap<UUID, ConcurrentHashMap<Item, CommandBinding>> bindings = new ConcurrentHashMap<>(0);
 }

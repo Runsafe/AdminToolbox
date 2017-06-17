@@ -26,7 +26,7 @@ public class AddLore extends PlayerCommand
 		RunsafeMeta item = executor.getItemInHand();
 		if (item != null && !item.is(Item.Unavailable.Air))
 		{
-			item.addLore(ChatColour.ToMinecraft((String) parameters.getValue("text")));
+			item.addLore(ChatColour.ToMinecraft(parameters.getValue("text")));
 			return "&eLore text added.";
 		}
 		return "&cInvalid item in hand.";
