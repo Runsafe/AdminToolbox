@@ -1,6 +1,5 @@
 package no.runsafe.admintoolbox.commands;
 
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -28,14 +27,7 @@ public class BindPermanent extends PlayerCommand
 			return "&cYou need to bind to an item";
 
 		String commandString = parameters.getValue("commands");
-
-		NBTTagCompound tag = handItem.getTagCompound();
-		if (tag == null)
-			tag = new NBTTagCompound();
-		tag.setString("runsafe.bound-commands", commandString);
-		// ToDo: Fix this.
-		//handItem.setTagCompound(tag);
-		//handItem.cloneWithNewCompound()
+		handItem.setTagCompound("runsafe.bound-commands", commandString);
 		return "&aBound!";
 	}
 }
