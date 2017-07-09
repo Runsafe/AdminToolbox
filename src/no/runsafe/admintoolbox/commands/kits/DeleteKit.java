@@ -2,7 +2,6 @@ package no.runsafe.admintoolbox.commands.kits;
 
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
@@ -14,7 +13,7 @@ public class DeleteKit extends PlayerCommand
 			"delete",
 			"Delete a kit",
 			"runsafe.toolbox.kits.delete",
-			new RequiredArgument("kit")
+			new KitArgument(handler)
 		);
 		this.handler = handler;
 	}
