@@ -7,6 +7,7 @@ import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.exceptions.UnknownMaterialException;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 
@@ -46,8 +47,15 @@ public class GiveItem extends ExecutableCommand
 
 	private RunsafeItemStack getItemId(String itemName)
 	{
-		Item item = Item.get(itemName);
-		return item == null ? null : item.getItem();
+		try
+		{
+			Item item = Item.get(itemName);
+			return item == null ? null : item.getItem();
+		}
+		catch (UnknownMaterialException e)
+		{
+			return null;
+		}
 	}
 
 	private void giveItems(IPlayer player, RunsafeItemStack item, int amount)
