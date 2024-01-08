@@ -16,7 +16,10 @@ pipeline {
         ant 'Default'
         jdk 'Default'
       }
-      steps { buildPluginWithAnt env.plugin, '', 'build/jar/*.jar' }
+      steps {
+        buildPluginWithAnt env.plugin, '', 'build/jar/*.jar'
+        cleanWs cleanWhenFailure: false, notFailBuild: true
+      }
     }
     stage('Deploy to test server') {
       agent { label 'server4' }
@@ -27,5 +30,7 @@ pipeline {
     }
     stage('Ask for promotion') { steps { askForPromotion() } }
   }
-  post { failure { buildReport env.plugin, 'Build failed' } }
+  post {
+    failure { buildReport env.plugin, 'Build failed' }
+  }
 }
