@@ -23,17 +23,18 @@ public class Colour extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeItemStack item = executor.getItemInHand();
+		RunsafeItemStack item = executor.getItemInMainHand();
 		if (item == null)
 			return "&cInvalid item.";
 
 		if (item.is(Item.Combat.Leggings.Leather) || item.is(Item.Combat.Boots.Leather) || item.is(Item.Combat.Chestplate.Leather) || item.is(Item.Combat.Helmet.Leather))
 		{
 			RunsafeLeatherArmor armor = (RunsafeLeatherArmor) item;
-			if (parameters.getValue("hex").equals("random"))
+			String hex = parameters.getRequired("hex");
+			if (hex.equals("random"))
 				((RunsafeLeatherArmor) item).RandomColour();
 			else
-				armor.setColor(Integer.valueOf(parameters.getValue("hex"), 16));
+				armor.setColor(Integer.valueOf(hex, 16));
 			return "&2Coloured!";
 		}
 		return "&cYou cannot colour that item.";

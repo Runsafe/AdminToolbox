@@ -24,7 +24,7 @@ public class Bind extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeMeta handItem = executor.getItemInHand();
+		RunsafeMeta handItem = executor.getItemInMainHand();
 
 		if (handItem == null)
 			return "&cYou need to bind to an item";
@@ -32,7 +32,7 @@ public class Bind extends PlayerCommand
 		Item itemType = handItem.getItemType();
 		String commandString = parameters.getValue("commands");
 
-		if (commandString.equalsIgnoreCase("none"))
+		if (commandString == null || commandString.equalsIgnoreCase("none"))
 		{
 			handler.removeBinding(executor, itemType);
 			return "&aTool unbound.";

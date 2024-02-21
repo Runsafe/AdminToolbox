@@ -24,7 +24,7 @@ public class CreateKit extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String kitName = parameters.getValue("kit");
+		String kitName = parameters.getRequired("kit");
 		if (!clanNamePattern.matcher(kitName).matches())
 			return "&cInvalid kit name: Must be A-Z, a-z, 0-9 and between 1-20 chars.";
 
