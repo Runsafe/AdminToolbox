@@ -24,7 +24,7 @@ public class Author extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeItemStack item = executor.getItemInHand();
+		RunsafeItemStack item = executor.getItemInMainHand();
 		if (item != null && item.is(Item.Special.Crafted.WrittenBook))
 		{
 			String author = ChatColour.ToMinecraft(parameters.getValue("author"));

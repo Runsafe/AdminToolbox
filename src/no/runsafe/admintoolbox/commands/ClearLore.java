@@ -20,7 +20,7 @@ public class ClearLore extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeMeta item = executor.getItemInHand();
+		RunsafeMeta item = executor.getItemInMainHand();
 		if (item != null && !item.is(Item.Unavailable.Air))
 		{
 			item.clearLore();

@@ -21,7 +21,7 @@ public class BindPermanent extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeMeta handItem = executor.getItemInHand();
+		RunsafeMeta handItem = executor.getItemInMainHand();
 
 		if (handItem == null)
 			return "&cYou need to bind to an item";

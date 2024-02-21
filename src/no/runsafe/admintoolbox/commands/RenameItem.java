@@ -22,7 +22,7 @@ public class RenameItem extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeMeta item = executor.getItemInHand();
+		RunsafeMeta item = executor.getItemInMainHand();
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
