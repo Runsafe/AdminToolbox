@@ -22,7 +22,7 @@ public class DeleteKit extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-		if (!handler.kitExists(kitName))
+		if (handler.isInvalidKit(kitName))
 			return "&cNo such kit exists.";
 
 		handler.deleteKit(kitName);

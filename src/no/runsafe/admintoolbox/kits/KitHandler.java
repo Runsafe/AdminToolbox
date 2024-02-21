@@ -45,9 +45,9 @@ public class KitHandler implements IServerReady
 				player.give(item);
 	}
 
-	public boolean kitExists(String kitName)
+	public boolean isInvalidKit(String kitName)
 	{
-		return kits.containsKey(kitName);
+		return !kits.containsKey(kitName);
 	}
 
 	public List<String> getAvailableKits(IPlayer player)
