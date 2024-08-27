@@ -3,7 +3,7 @@ main: no.runsafe.admintoolbox.AdminToolbox
 version: 1.0.@BUILD@
 authors: []
 depend: []
-description:
+description: 'Just some tools'
 commands:
   colour:
     description: Colours a leather armour item with the supplied hex code
