@@ -27,24 +27,26 @@ public class KitRepository extends Repository
 		database.execute("DELETE FROM `toolbox_kits` WHERE `ID` = ?", name);
 	}
 
-	public void saveKit(String name, RunsafeInventory kit)
+	public void saveKit(KitData kit)
 	{
-		String inventory = kit.serialize();
+		String inventory = kit.getInventory().serialize();
 		database.execute(
-				"INSERT INTO `toolbox_kits` (`ID`, `inventory`) VALUES(?, ?) ON DUPLICATE KEY UPDATE `inventory` = ?",
-				name, inventory, inventory
+			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `cooldownTime`) " +
+				"VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE `inventory` = ?",
+			kit.getKitName(), inventory, kit.getCooldown(), inventory
 		);
 	}
 
-	public HashMap<String, RunsafeInventory> getKits()
+	public HashMap<String, KitData> getKits()
 	{
-		HashMap<String, RunsafeInventory> kits = new HashMap<>(0);
+		HashMap<String, KitData> kits = new HashMap<>(0);
 
 		for (IRow row : database.query("SELECT `ID`, `inventory` FROM `toolbox_kits`"))
 		{
 			RunsafeInventory inventory = server.createInventory(null, 36);
 			inventory.unserialize(row.String("inventory"));
-			kits.put(row.String("ID"), inventory);
+			String kitName = row.String("ID");
+			kits.put(kitName, new KitData(kitName, inventory, row.Duration("cooldownTime")));
 		}
 
 		return kits;
@@ -62,6 +64,10 @@ public class KitRepository extends Repository
 				"`inventory` LONGTEXT NOT NULL," +
 				"PRIMARY KEY (`ID`)" +
 			")"
+		);
+
+		updates.addQueries(
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldownTime` VARCHAR(32) NULL DEFAULT NULL AFTER `inventory`;"
 		);
 
 		return updates;

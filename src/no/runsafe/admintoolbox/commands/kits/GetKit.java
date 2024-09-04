@@ -22,14 +22,11 @@ public class GetKit extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-		if (handler.isInvalidKit(kitName))
-			return "&cNo such kit exists.";
 
 		if (!handler.canUseKit(executor, kitName))
 			return "&cYou do not have permission to get that kit.";
 
-		handler.getKit(kitName, executor);
-		return null;
+		return handler.getKit(kitName, executor);
 	}
 
 	private final KitHandler handler;

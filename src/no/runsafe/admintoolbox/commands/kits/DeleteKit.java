@@ -22,8 +22,6 @@ public class DeleteKit extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-		if (handler.isInvalidKit(kitName))
-			return "&cNo such kit exists.";
 
 		handler.deleteKit(kitName);
 		return "&eKit '" + kitName + "' has been deleted.";
