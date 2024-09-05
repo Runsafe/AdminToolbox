@@ -8,7 +8,7 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 
 public class SetCooldownTime extends ExecutableCommand
 {
-	protected SetCooldownTime(KitHandler handler)
+	public SetCooldownTime(KitHandler handler)
 	{
 		super(
 			"setcooldowntime",
