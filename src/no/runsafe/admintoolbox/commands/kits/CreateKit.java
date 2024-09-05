@@ -27,7 +27,7 @@ public class CreateKit extends PlayerCommand
 	{
 		String kitName = parameters.getRequired("kit");
 		java.time.Duration cooldown = parameters.getValue("cooldown");
-		if (!clanNamePattern.matcher(kitName).matches())
+		if (!kitNamePattern.matcher(kitName).matches())
 			return "&cInvalid kit name: Must be A-Z, a-z, 0-9 and between 1-20 chars.";
 
 		handler.createKit(kitName, executor, cooldown);
@@ -41,5 +41,5 @@ public class CreateKit extends PlayerCommand
 	}
 
 	private final KitHandler handler;
-	private final Pattern clanNamePattern = Pattern.compile("^[A-Za-z0-9]{1,20}$");
+	private final Pattern kitNamePattern = Pattern.compile("^[A-Za-z0-9]{1,20}$");
 }
