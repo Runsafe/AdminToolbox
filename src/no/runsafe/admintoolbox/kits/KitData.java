@@ -43,7 +43,7 @@ public class KitData
 		this.cooldown = cooldown;
 	}
 
-	String kitName;
-	RunsafeInventory inventory;
-	Duration cooldown;
+	private String kitName;
+	private RunsafeInventory inventory;
+	private Duration cooldown;
 }
