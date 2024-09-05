@@ -1,6 +1,7 @@
 package no.runsafe.admintoolbox.kits;
 
 import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.event.IServerReady;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
@@ -81,11 +82,11 @@ public class KitHandler implements IServerReady
 		return String.format("&aObtained kit&r: %s", kitName);
 	}
 
-	public List<String> getAvailableKits(IPlayer player)
+	public List<String> getAvailableKits(ICommandExecutor player)
 	{
 		List<String> availableKits = new ArrayList<>(0);
 		for (String kit : kits.keySet())
-			if (canUseKit(player, kit))
+			if (!(player instanceof IPlayer) || canUseKit((IPlayer) player, kit))
 				availableKits.add(kit);
 
 		return availableKits;
