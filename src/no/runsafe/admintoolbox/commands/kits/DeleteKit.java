@@ -1,11 +1,11 @@
 package no.runsafe.admintoolbox.commands.kits;
 
 import no.runsafe.admintoolbox.kits.KitHandler;
+import no.runsafe.framework.api.command.ExecutableCommand;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.player.PlayerCommand;
-import no.runsafe.framework.api.player.IPlayer;
 
-public class DeleteKit extends PlayerCommand
+public class DeleteKit extends ExecutableCommand
 {
 	public DeleteKit(KitHandler handler)
 	{
@@ -19,11 +19,9 @@ public class DeleteKit extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, IArgumentList parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-		if (handler.isInvalidKit(kitName))
-			return "&cNo such kit exists.";
 
 		handler.deleteKit(kitName);
 		return "&eKit '" + kitName + "' has been deleted.";

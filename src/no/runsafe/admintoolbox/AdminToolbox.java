@@ -48,5 +48,6 @@ public class AdminToolbox extends RunsafePlugin
 		kitCommand.addSubCommand(getInstance(DeleteKit.class));
 		kitCommand.addSubCommand(getInstance(GiveKit.class));
 		kitCommand.addSubCommand(getInstance(ListKits.class));
+		kitCommand.addSubCommand(getInstance(SetCooldownTime.class));
 	}
 }

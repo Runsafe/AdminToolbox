@@ -1,12 +1,13 @@
 package no.runsafe.admintoolbox.commands.kits;
 
 import no.runsafe.admintoolbox.kits.KitHandler;
+import no.runsafe.framework.api.command.ExecutableCommand;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.Player;
-import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
-public class GiveKit extends PlayerCommand
+public class GiveKit extends ExecutableCommand
 {
 	public GiveKit(KitHandler handler)
 	{
@@ -21,10 +22,10 @@ public class GiveKit extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, IArgumentList parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-		if (!handler.canUseKit(executor, kitName))
+		if (executor instanceof IPlayer && !handler.canUseKit((IPlayer) executor, kitName))
 			return "&cYou do not have permission to give that kit.";
 
 		IPlayer targetPlayer = parameters.getValue("player");
