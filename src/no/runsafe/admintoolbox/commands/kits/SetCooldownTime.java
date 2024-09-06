@@ -25,9 +25,12 @@ public class SetCooldownTime extends ExecutableCommand
 		String kitName = parameters.getRequired("kit");
 		java.time.Duration cooldown = parameters.getValue("cooldown");
 
+		if (cooldown == null)
+			cooldown = java.time.Duration.ZERO;
+
 		handler.changeKitCooldown(kitName, cooldown);
 
-		if (cooldown == null)
+		if (cooldown.isZero())
 			return String.format("Removed cooldown timer for kit: %s", kitName);
 		return String.format(
 			"&aSet cooldown timer for kit %s to %s.",
