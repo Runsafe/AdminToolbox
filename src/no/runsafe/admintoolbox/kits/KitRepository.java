@@ -32,7 +32,7 @@ public class KitRepository extends Repository
 		database.execute(
 			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `cooldownTime`) VALUES(?, ?, ?) " +
 				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `cooldownTime` = VALUES(`cooldownTime`)",
-			kit.getKitName(), kit.getInventory().serialize(), kit.getCooldown()
+			kit.getKitName(), kit.getInventory().serialize(), kit.getCooldown().toString()
 		);
 	}
 

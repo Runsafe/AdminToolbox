@@ -82,6 +82,11 @@ public class KitHandler implements IServerReady
 		return String.format("&aObtained kit&r: %s", kitName);
 	}
 
+	public KitData getKitData(String kitName)
+	{
+		return kits.get(kitName);
+	}
+
 	public List<String> getAvailableKits(ICommandExecutor player)
 	{
 		List<String> availableKits = new ArrayList<>(0);
