@@ -29,9 +29,11 @@ public class CreateKit extends PlayerCommand
 		java.time.Duration cooldown = parameters.getValue("cooldown");
 		if (!kitNamePattern.matcher(kitName).matches())
 			return "&cInvalid kit name: Must be A-Z, a-z, 0-9 and between 1-20 chars.";
+		if (cooldown == null)
+			cooldown = java.time.Duration.ZERO;
 
 		handler.createKit(kitName, executor, cooldown);
-		if (cooldown == null)
+		if (cooldown.isZero())
 			return String.format("&eKit '%s' created.", kitName);
 
 		return String.format(

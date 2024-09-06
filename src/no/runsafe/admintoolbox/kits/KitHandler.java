@@ -55,8 +55,8 @@ public class KitHandler implements IServerReady
 			return "&cThat kit does not exist.";
 
 		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass")
-			|| kits.get(kitName).getCooldown() == null
-			|| kits.get(kitName).getCooldown().isZero()
+			&& kits.get(kitName).getCooldown() != null
+			&& !kits.get(kitName).getCooldown().isZero()
 		)
 		{
 			if (kitCooldowns.containsKey(player) && kitCooldowns.get(player).containsKey(kitName))

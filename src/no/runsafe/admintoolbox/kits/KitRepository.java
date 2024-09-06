@@ -29,11 +29,10 @@ public class KitRepository extends Repository
 
 	public void saveKit(KitData kit)
 	{
-		String inventory = kit.getInventory().serialize();
 		database.execute(
-			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `cooldownTime`) " +
-				"VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE `inventory` = ?",
-			kit.getKitName(), inventory, kit.getCooldown(), inventory
+			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `cooldownTime`) VALUES(?, ?, ?) " +
+				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `cooldownTime` = VALUES(`cooldownTime`)",
+			kit.getKitName(), kit.getInventory().serialize(), kit.getCooldown()
 		);
 	}
 
@@ -41,7 +40,7 @@ public class KitRepository extends Repository
 	{
 		HashMap<String, KitData> kits = new HashMap<>(0);
 
-		for (IRow row : database.query("SELECT `ID`, `inventory` FROM `toolbox_kits`"))
+		for (IRow row : database.query("SELECT `ID`, `inventory`, `cooldownTime` FROM `toolbox_kits`"))
 		{
 			RunsafeInventory inventory = server.createInventory(null, 36);
 			inventory.unserialize(row.String("inventory"));
