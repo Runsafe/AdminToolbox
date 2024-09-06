@@ -11,6 +11,8 @@ public class KitData
 		this.kitName = kitName;
 		this.inventory = inventory;
 		this.cooldown = cooldown;
+		if (cooldown == null)
+			this.cooldown = Duration.ZERO;
 	}
 
 	public String getKitName()
@@ -41,6 +43,8 @@ public class KitData
 	public void setCooldown(Duration cooldown)
 	{
 		this.cooldown = cooldown;
+		if (cooldown == null)
+			this.cooldown = Duration.ZERO;
 	}
 
 	private String kitName;
