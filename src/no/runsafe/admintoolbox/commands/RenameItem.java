@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -24,14 +25,14 @@ public class RenameItem extends PlayerCommand
 	{
 		RunsafeMeta item = executor.getItemInMainHand();
 		if (item == null)
-			return "&cYou need to be holding an item.";
+			return Config.Message.playerNotHoldingItem;
 
 		String name = ChatColour.ToMinecraft(parameters.getValue("name"));
 		item.setDisplayName(name);
 		if (name.equals(item.getDisplayName()))
-			return "&2The item you hold has been renamed.";
+			return Config.Message.renameItem.succeed;
 
-		return "&cThat item cannot be renamed.";
+		return Config.Message.renameItem.fail;
 	}
 }
 

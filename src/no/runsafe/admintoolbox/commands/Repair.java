@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
@@ -21,9 +22,9 @@ public class Repair extends PlayerCommand
 	{
 		RunsafeMeta item = executor.getItemInMainHand();
 		if (item == null)
-			return "&cYou are not holding an item";
+			return Config.Message.playerNotHoldingItem;
 
 		item.setDurability((short) 0);
-		return "&aThe item you are holding has been repaired.";
+		return Config.Message.repair.succeed;
 	}
 }

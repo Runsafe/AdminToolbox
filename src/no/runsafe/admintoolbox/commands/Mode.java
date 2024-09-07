@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.Enumeration;
@@ -30,7 +31,7 @@ public class Mode extends ExecutableCommand
 		if (target == null)
 		{
 			if (!(executor instanceof IPlayer))
-				return "&cYou need to supply a player for this command when called from the console.";
+				return Config.Message.mode.failConsole;
 			else
 				target = (IPlayer) executor;
 		}
@@ -45,7 +46,7 @@ public class Mode extends ExecutableCommand
 
 	private String getGameModeUpdateMessage(IPlayer target)
 	{
-		return String.format("%s now has the game mode %s.", target.getPrettyName(), target.getGameMode());
+		return String.format(Config.Message.mode.succeed, target.getPrettyName(), target.getGameMode());
 	}
 
 	private final IConsole console;

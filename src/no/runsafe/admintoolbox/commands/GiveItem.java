@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
@@ -35,14 +36,14 @@ public class GiveItem extends ExecutableCommand
 		RunsafeItemStack item = this.getItemId(parameters.getValue("item"));
 
 		if (item == null)
-			return "&cInvalid item name or ID.";
+			return Config.Message.give.failInvalidItem;
 		if (item.is(Item.Unavailable.Air))
-			return "&cYou cannot give air.";
+			return Config.Message.give.failAir;
 
 		Integer amount = parameters.getValue("amount");
 		assert (amount != null);
 		this.giveItems(player, item, amount);
-		return String.format("&fGave %sx %s to %s&f.", amount, item.getNormalName(), player.getPrettyName());
+		return String.format(Config.Message.give.succeed, amount, item.getNormalName(), player.getPrettyName());
 	}
 
 	private RunsafeItemStack getItemId(String itemName)

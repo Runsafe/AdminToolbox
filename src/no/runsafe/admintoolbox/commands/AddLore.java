@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -27,8 +28,8 @@ public class AddLore extends PlayerCommand
 		if (item != null && !item.is(Item.Unavailable.Air))
 		{
 			item.addLore(ChatColour.ToMinecraft(parameters.getValue("text")));
-			return "&eLore text added.";
+			return Config.Message.lore.addSucceed;
 		}
-		return "&cInvalid item in hand.";
+		return Config.Message.playerNotHoldingItem;
 	}
 }

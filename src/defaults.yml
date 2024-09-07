@@ -1,4 +1,5 @@
 message:
+  playerNotHoldingItem: '&cYou need to hold an item in your main hand first.'
   kit:
     invalidName: '&cInvalid kit name: Must be A-Z, a-z, 0-9 and between 1-20 chars.'
     created: '&eKit &r%s&e created with no cooldown that can be redeemed anywhere.'
@@ -16,3 +17,27 @@ message:
     getWrongWorld: '&cYou have to be in &r%s&c to redeem this kit.'
     getOnCooldown: '&cStill on cooldown. Time until you can redeem this kit&r: %s'
     getSucceed: '&aObtained kit&r: %s'
+  lore:
+    addSucceed: '&eLore text added.'
+    removeSucceed: '&eLore text cleared.'
+  author:
+    setFail: '&cYou cannot change the author of that item.'
+    setSucceed: '&2Author changed to &r%s'
+  bind:
+    setUnbind: '&aTool unbound.'
+    setSucceed: '&aBound!'
+  colour:
+    setFail: '&cYou cannot colour that item.'
+    setSucceed: '&2Coloured!'
+  give:
+    failInvalidItem: '&cInvalid item name or ID.'
+    failAir: '&cYou cannot give air.'
+    succeed: '&fGave %sx %s to %s&f.'
+  mode:
+    failConsole: '&cYou need to supply a player for this command when called from the console.'
+    succeed: '%s now has the game mode %s.'
+  renameItem:
+    fail: '&cThat item cannot be renamed.'
+    succeed: '&2The item you hold has been renamed.'
+  repair:
+    succeed: '&aThe item you are holding has had its durability value set to zero.'
