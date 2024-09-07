@@ -25,10 +25,7 @@ public class GiveKit extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-		if (executor instanceof IPlayer && !handler.canUseKit((IPlayer) executor, kitName))
-			return "&cYou do not have permission to give that kit.";
-
-		IPlayer targetPlayer = parameters.getValue("player");
+		IPlayer targetPlayer = parameters.getRequired("player");
 
 		handler.giveKit(kitName, targetPlayer);
 		return String.format("&eKit &r%s&e given to %s &e.", kitName, targetPlayer.getPrettyName());

@@ -5,7 +5,6 @@ import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import org.apache.commons.lang.StringUtils;
 
@@ -28,10 +27,6 @@ public class KitInfo extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		String kitName = parameters.getValue("kit");
-
-		if (executor instanceof IPlayer && !handler.canUseKit((IPlayer) executor, kitName))
-			return "&cYou do not have permission to get information on that kit.";
-
 		KitData kit = handler.getKitData(kitName);
 
 		ArrayList<String> itemList = new ArrayList<>();

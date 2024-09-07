@@ -31,7 +31,7 @@ public class SetCooldownTime extends ExecutableCommand
 		handler.changeKitCooldown(kitName, cooldown);
 
 		if (cooldown.isZero())
-			return String.format("Removed cooldown timer for kit: %s", kitName);
+			return String.format("&aRemoved cooldown timer for kit&r: %s", kitName);
 		return String.format(
 			"&aSet cooldown timer for kit %s to %s.",
 			kitName, cooldown.toString().replace("PT", "")

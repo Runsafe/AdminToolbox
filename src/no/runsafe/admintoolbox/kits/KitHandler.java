@@ -65,17 +65,14 @@ public class KitHandler implements IServerReady
 		if (!kits.containsKey(kitName))
 			return "&cThat kit does not exist.";
 
-		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass")
-			&& kits.get(kitName).getCooldown() != null
-			&& !kits.get(kitName).getCooldown().isZero()
-		)
+		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass") && !kits.get(kitName).getCooldown().isZero())
 		{
 			if (kitCooldowns.containsKey(player) && kitCooldowns.get(player).containsKey(kitName))
 			{
 				if (!kitCooldowns.get(player).get(kitName).isBefore(Instant.now()))
 					return String.format(
-							"&cStill on cooldown. Time until you can redeem this kit&r: %s",
-							Duration.between(Instant.now(), kitCooldowns.get(player).get(kitName)).toString().replace("PT", "")
+						"&cStill on cooldown. Time until you can redeem this kit&r: %s",
+						Duration.between(Instant.now(), kitCooldowns.get(player).get(kitName)).toString().replace("PT", "")
 					);
 
 				kitCooldowns.get(player).remove(kitName);

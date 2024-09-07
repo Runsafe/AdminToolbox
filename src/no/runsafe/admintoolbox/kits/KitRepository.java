@@ -31,7 +31,7 @@ public class KitRepository extends Repository
 	{
 		database.execute(
 			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `cooldownTime`) VALUES(?, ?, ?) " +
-				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `cooldownTime` = VALUES(`cooldownTime`)",
+				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `cooldown_time` = VALUES(`cooldown_time`)",
 			kit.getKitName(), kit.getInventory().serialize(), kit.getCooldown().toString()
 		);
 	}
@@ -40,12 +40,12 @@ public class KitRepository extends Repository
 	{
 		HashMap<String, KitData> kits = new HashMap<>(0);
 
-		for (IRow row : database.query("SELECT `ID`, `inventory`, `cooldownTime` FROM `toolbox_kits`"))
+		for (IRow row : database.query("SELECT `ID`, `inventory`, `cooldown_time` FROM `toolbox_kits`"))
 		{
 			RunsafeInventory inventory = server.createInventory(null, 36);
 			inventory.unserialize(row.String("inventory"));
 			String kitName = row.String("ID");
-			kits.put(kitName, new KitData(kitName, inventory, row.Duration("cooldownTime")));
+			kits.put(kitName, new KitData(kitName, inventory, row.Duration("cooldown_time")));
 		}
 
 		return kits;
@@ -66,7 +66,7 @@ public class KitRepository extends Repository
 		);
 
 		updates.addQueries(
-			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldownTime` VARCHAR(32) NULL DEFAULT NULL AFTER `inventory`;"
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldown_time` VARCHAR(32) NULL DEFAULT NULL AFTER `inventory`;"
 		);
 
 		return updates;

@@ -20,11 +20,6 @@ public class KitData
 		return kitName;
 	}
 
-	public void setKitName(String kitName)
-	{
-		this.kitName = kitName;
-	}
-
 	public RunsafeInventory getInventory()
 	{
 		return inventory;
@@ -47,7 +42,7 @@ public class KitData
 			this.cooldown = Duration.ZERO;
 	}
 
-	private String kitName;
+	private final String kitName;
 	private RunsafeInventory inventory;
 	private Duration cooldown;
 }

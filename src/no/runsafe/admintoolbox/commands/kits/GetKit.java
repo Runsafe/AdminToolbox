@@ -23,9 +23,6 @@ public class GetKit extends PlayerCommand
 	{
 		String kitName = parameters.getValue("kit");
 
-		if (!handler.canUseKit(executor, kitName))
-			return "&cYou do not have permission to get that kit.";
-
 		return handler.getKit(kitName, executor);
 	}
 

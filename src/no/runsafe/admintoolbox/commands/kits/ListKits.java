@@ -27,7 +27,7 @@ public class ListKits extends ExecutableCommand
 		if (kits.isEmpty())
 			return "&cYou have no available kits.";
 
-		return "&aAvailable Kits: &f" + StringUtils.join(kits, ", ");
+		return "&aAvailable Kits: &f" + StringUtils.join(kits, "&r, &f");
 	}
 
 	private final KitHandler handler;
