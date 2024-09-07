@@ -35,6 +35,7 @@ public class KitInfo extends ExecutableCommand
 			itemList.add(item.getDisplayName());
 
 		return "&5KitName: &r" + kitName +
+			", \n&9Universe you can redeem kit in: &r" + (kit.getUniverse() == null ? "Everywhere" : kit.getUniverse()) +
 			", \n&9Kit cooldown time: &r" + TimeFormatter.formatDuration(kit.getCooldown()) +
 			", \n&9Kit Items: &r" + StringUtils.join(itemList, ", ");
 	}

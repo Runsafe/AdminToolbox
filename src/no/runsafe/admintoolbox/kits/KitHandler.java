@@ -39,11 +39,11 @@ public class KitHandler implements IServerReady
 		kitCooldowns = cooldownRepository.getKitCooldowns();
 	}
 
-	public void createKit(String kitName, IPlayer player, Duration cooldown)
+	public void createKit(String kitName, IPlayer player, String universeName, Duration cooldown)
 	{
 		RunsafeInventory inventory = server.createInventory(null, 36);
 		inventory.unserialize(player.getInventory().serialize());
-		KitData kit = new KitData(kitName, inventory, cooldown);
+		KitData kit = new KitData(kitName, inventory, universeName, cooldown);
 		kits.put(kitName, kit);
 		repository.saveKit(kit);
 	}
@@ -61,11 +61,27 @@ public class KitHandler implements IServerReady
 		}
 	}
 
+	public void setKitUniverse(String kitName, String universeName)
+	{
+		KitData kit = kits.get(kitName);
+		kit.setUniverse(universeName);
+		repository.saveKit(kit);
+	}
+
 	public String getKit(String kitName, IPlayer player)
 	{
 		if (!kits.containsKey(kitName))
 			return "&cThat kit does not exist.";
 
+		// Check universe
+		String kitUniverse = kits.get(kitName).getUniverse();
+		if (kitUniverse != null && player.getUniverse() != null
+			&& !player.hasPermission("runsafe.toolbox.kits.ignoreuniverse")
+			&& !player.getUniverse().getName().equals(kitUniverse)
+		)
+			return String.format("&cYou have to be in &r%s&c to redeem this kit.", kitUniverse);
+
+		// Check cooldown
 		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass") && !kits.get(kitName).getCooldown().isZero())
 		{
 			if (kitCooldowns.containsKey(player) && kitCooldowns.get(player).containsKey(kitName))

@@ -6,10 +6,11 @@ import java.time.Duration;
 
 public class KitData
 {
-	public KitData(String kitName, RunsafeInventory inventory, Duration cooldown)
+	public KitData(String kitName, RunsafeInventory inventory, String universeName, Duration cooldown)
 	{
 		this.kitName = kitName;
 		this.inventory = inventory;
+		this.universeName = universeName;
 		this.cooldown = cooldown;
 		if (cooldown == null)
 			this.cooldown = Duration.ZERO;
@@ -30,6 +31,16 @@ public class KitData
 		this.inventory = inventory;
 	}
 
+	public String getUniverse()
+	{
+		return universeName;
+	}
+
+	public void setUniverse(String universeName)
+	{
+		this.universeName = universeName;
+	}
+
 	public Duration getCooldown()
 	{
 		return cooldown;
@@ -44,5 +55,6 @@ public class KitData
 
 	private final String kitName;
 	private RunsafeInventory inventory;
+	private String universeName;
 	private Duration cooldown;
 }

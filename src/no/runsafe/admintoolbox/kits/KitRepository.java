@@ -30,9 +30,10 @@ public class KitRepository extends Repository
 	public void saveKit(KitData kit)
 	{
 		database.execute(
-			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `cooldown_time`) VALUES(?, ?, ?) " +
-				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `cooldown_time` = VALUES(`cooldown_time`)",
-			kit.getKitName(), kit.getInventory().serialize(), kit.getCooldown().toString()
+			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `universe`, `cooldown_time`) VALUES(?, ?, ?, ?) " +
+				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `universe` = VALUES(`universe`), " +
+				"`cooldown_time` = VALUES(`cooldown_time`)",
+			kit.getKitName(), kit.getInventory().serialize(), kit.getUniverse(), kit.getCooldown().toString()
 		);
 	}
 
@@ -40,12 +41,12 @@ public class KitRepository extends Repository
 	{
 		HashMap<String, KitData> kits = new HashMap<>(0);
 
-		for (IRow row : database.query("SELECT `ID`, `inventory`, `cooldown_time` FROM `toolbox_kits`"))
+		for (IRow row : database.query("SELECT `ID`, `inventory`, `universe`, `cooldown_time` FROM `toolbox_kits`"))
 		{
 			RunsafeInventory inventory = server.createInventory(null, 36);
 			inventory.unserialize(row.String("inventory"));
 			String kitName = row.String("ID");
-			kits.put(kitName, new KitData(kitName, inventory, row.Duration("cooldown_time")));
+			kits.put(kitName, new KitData(kitName, inventory, row.String("universe"), row.Duration("cooldown_time")));
 		}
 
 		return kits;
@@ -66,7 +67,8 @@ public class KitRepository extends Repository
 		);
 
 		updates.addQueries(
-			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldown_time` VARCHAR(32) NOT NULL DEFAULT 'PT0S' AFTER `inventory`;"
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `universe` VARCHAR(32) NULL AFTER `inventory`;",
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldown_time` VARCHAR(32) NOT NULL DEFAULT 'PT0S' AFTER `universe`;"
 		);
 
 		return updates;
