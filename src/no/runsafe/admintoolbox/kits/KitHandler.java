@@ -15,9 +15,10 @@ import java.util.List;
 
 public class KitHandler implements IServerReady
 {
-	public KitHandler(KitRepository repository, IServer server)
+	public KitHandler(KitRepository repository, KitCooldownRepository cooldownRepository, IServer server)
 	{
 		this.repository = repository;
+		this.cooldownRepository = cooldownRepository;
 		this.server = server;
 	}
 
@@ -25,12 +26,16 @@ public class KitHandler implements IServerReady
 	public void OnServerReady()
 	{
 		kits = repository.getKits();
+		cooldownRepository.purgeEndedCooldowns();
+		kitCooldowns = cooldownRepository.getKitCooldowns();
 	}
 
 	public void deleteKit(String kitName)
 	{
 		kits.remove(kitName);
 		repository.deleteKit(kitName);
+		cooldownRepository.removeKitCooldown(kitName);
+		kitCooldowns = cooldownRepository.getKitCooldowns();
 	}
 
 	public void createKit(String kitName, IPlayer player, Duration cooldown)
@@ -47,6 +52,12 @@ public class KitHandler implements IServerReady
 		KitData kit = kits.get(kitName);
 		kit.setCooldown(cooldown);
 		repository.saveKit(kit);
+
+		if (cooldown.isZero())
+		{
+			cooldownRepository.removeKitCooldown(kitName);
+			kitCooldowns = cooldownRepository.getKitCooldowns();
+		}
 	}
 
 	public String getKit(String kitName, IPlayer player)
@@ -73,7 +84,9 @@ public class KitHandler implements IServerReady
 			if (!kitCooldowns.containsKey(player))
 				kitCooldowns.put(player, new HashMap<>(0));
 
-			kitCooldowns.get(player).put(kitName, Instant.now().plus(kits.get(kitName).getCooldown()));
+			Instant cooldownEnd = Instant.now().plus(kits.get(kitName).getCooldown());
+			cooldownRepository.setCooldown(player, kitName, cooldownEnd);
+			kitCooldowns.get(player).put(kitName, cooldownEnd);
 		}
 
 		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
@@ -103,7 +116,8 @@ public class KitHandler implements IServerReady
 	}
 
 	private final KitRepository repository;
+	private final KitCooldownRepository cooldownRepository;
 	private final IServer server;
 	private HashMap<String, KitData> kits = new HashMap<>(0);
-	private final HashMap<IPlayer, HashMap<String, Instant>> kitCooldowns = new HashMap<>(0);
+	private HashMap<IPlayer, HashMap<String, Instant>> kitCooldowns = new HashMap<>(0);
 }
