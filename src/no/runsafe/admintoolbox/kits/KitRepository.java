@@ -66,7 +66,7 @@ public class KitRepository extends Repository
 		);
 
 		updates.addQueries(
-			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldown_time` VARCHAR(32) NULL DEFAULT NULL AFTER `inventory`;"
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldown_time` VARCHAR(32) NOT NULL DEFAULT 'PT0S' AFTER `inventory`;"
 		);
 
 		return updates;
