@@ -89,10 +89,15 @@ public class KitHandler implements IServerReady
 			kitCooldowns.get(player).put(kitName, cooldownEnd);
 		}
 
-		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
-			player.give(item);
+		giveKit(kitName, player);
 
 		return String.format("&aObtained kit&r: %s", kitName);
+	}
+
+	public void giveKit(String kitName, IPlayer player)
+	{
+		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
+			player.give(item);
 	}
 
 	public KitData getKitData(String kitName)

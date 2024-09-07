@@ -29,9 +29,9 @@ public class GiveKit extends ExecutableCommand
 			return "&cYou do not have permission to give that kit.";
 
 		IPlayer targetPlayer = parameters.getValue("player");
-		assert(targetPlayer != null);
-		handler.getKit(kitName, targetPlayer);
-		return "&eKit '" + kitName + "' given to " + targetPlayer.getPlayerListName() + "&e.";
+
+		handler.giveKit(kitName, targetPlayer);
+		return String.format("&eKit &r%s&e given to %s &e.", kitName, targetPlayer.getPrettyName());
 	}
 
 	private final KitHandler handler;
