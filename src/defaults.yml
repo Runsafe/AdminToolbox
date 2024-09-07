@@ -1,1 +1,18 @@
-option: value
+message:
+  kit:
+    invalidName: '&cInvalid kit name: Must be A-Z, a-z, 0-9 and between 1-20 chars.'
+    created: '&eKit &r%s&e created with no cooldown that can be redeemed anywhere.'
+    created2: '&eKit &r%s&e created for universe &r%s&e with a cooldown time of &r%s'
+    deleted: '&eKit &r%s&e has been deleted.'
+    give: '&eKit &r%s&e given to %s &e.'
+    noneAvailable: '&cYou have no available kits.'
+    available: '&aAvailable Kits: &f'
+    availableSeparator: '&r, &f'
+    removeCooldownTime: '&aRemoved cooldown timer for kit&r: %s'
+    setCooldownTime: '&aSet cooldown timer for kit &r%s&e to &r%s&e.'
+    removeUniverse: '&aRemoved universe requirement for kit &r%s'
+    setUniverse: '&aSet universe for kit &r%s&a to &r%s'
+    getNotExist: '&cThat kit does not exist.'
+    getWrongWorld: '&cYou have to be in &r%s&c to redeem this kit.'
+    getOnCooldown: '&cStill on cooldown. Time until you can redeem this kit&r: %s'
+    getSucceed: '&aObtained kit&r: %s'

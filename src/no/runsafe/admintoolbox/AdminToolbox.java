@@ -27,6 +27,8 @@ public class AdminToolbox extends RunsafePlugin
 
 		Debugger = getComponent(IDebug.class);
 
+		addComponent(Config.class);
+
 		addComponent(BindingHandler.class);
 
 		addComponent(Author.class);

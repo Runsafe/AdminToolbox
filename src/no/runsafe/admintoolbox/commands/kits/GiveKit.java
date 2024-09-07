@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -28,7 +29,7 @@ public class GiveKit extends ExecutableCommand
 		IPlayer targetPlayer = parameters.getRequired("player");
 
 		handler.giveKit(kitName, targetPlayer);
-		return String.format("&eKit &r%s&e given to %s &e.", kitName, targetPlayer.getPrettyName());
+		return String.format(Config.Message.Kit.give, kitName, targetPlayer.getPrettyName());
 	}
 
 	private final KitHandler handler;

@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -24,7 +25,7 @@ public class DeleteKit extends ExecutableCommand
 		String kitName = parameters.getValue("kit");
 
 		handler.deleteKit(kitName);
-		return "&eKit '" + kitName + "' has been deleted.";
+		return String.format(Config.Message.Kit.deleted, kitName);
 	}
 
 	private final KitHandler handler;

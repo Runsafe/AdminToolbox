@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.argument.Duration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
@@ -31,16 +32,16 @@ public class CreateKit extends PlayerCommand
 		java.time.Duration cooldown = parameters.getValue("cooldown");
 		String universeName = parameters.getValue("UniverseName");
 		if (!kitNamePattern.matcher(kitName).matches())
-			return "&cInvalid kit name: Must be A-Z, a-z, 0-9 and between 1-20 chars.";
+			return Config.Message.Kit.invalidName;
 		if (cooldown == null)
 			cooldown = java.time.Duration.ZERO;
 
 		handler.createKit(kitName, executor, universeName, cooldown);
 		if (universeName == null)
-			return String.format("&eKit '%s' created with no cooldown that can be redeemed anywhere.", kitName);
+			return String.format(Config.Message.Kit.created, kitName);
 
 		return String.format(
-			"&eKit &r%s'&e created for universe &r%s&e with a cooldown time of &r%s",
+			Config.Message.Kit.created2,
 			kitName, universeName, TimeFormatter.formatDuration(cooldown)
 		);
 	}
