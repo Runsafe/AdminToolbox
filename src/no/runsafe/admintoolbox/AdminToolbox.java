@@ -7,7 +7,6 @@ import no.runsafe.admintoolbox.kits.KitCooldownRepository;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.admintoolbox.kits.KitRepository;
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
