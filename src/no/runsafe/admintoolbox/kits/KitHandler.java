@@ -6,6 +6,7 @@ import no.runsafe.framework.api.event.IServerReady;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.tools.TimeFormatter;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -15,9 +16,10 @@ import java.util.List;
 
 public class KitHandler implements IServerReady
 {
-	public KitHandler(KitRepository repository, IServer server)
+	public KitHandler(KitRepository repository, KitCooldownRepository cooldownRepository, IServer server)
 	{
 		this.repository = repository;
+		this.cooldownRepository = cooldownRepository;
 		this.server = server;
 	}
 
@@ -25,12 +27,16 @@ public class KitHandler implements IServerReady
 	public void OnServerReady()
 	{
 		kits = repository.getKits();
+		cooldownRepository.purgeEndedCooldowns();
+		kitCooldowns = cooldownRepository.getKitCooldowns();
 	}
 
 	public void deleteKit(String kitName)
 	{
 		kits.remove(kitName);
 		repository.deleteKit(kitName);
+		cooldownRepository.removeKitCooldown(kitName);
+		kitCooldowns = cooldownRepository.getKitCooldowns();
 	}
 
 	public void createKit(String kitName, IPlayer player, Duration cooldown)
@@ -47,6 +53,12 @@ public class KitHandler implements IServerReady
 		KitData kit = kits.get(kitName);
 		kit.setCooldown(cooldown);
 		repository.saveKit(kit);
+
+		if (cooldown.isZero())
+		{
+			cooldownRepository.removeKitCooldown(kitName);
+			kitCooldowns = cooldownRepository.getKitCooldowns();
+		}
 	}
 
 	public String getKit(String kitName, IPlayer player)
@@ -54,17 +66,14 @@ public class KitHandler implements IServerReady
 		if (!kits.containsKey(kitName))
 			return "&cThat kit does not exist.";
 
-		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass")
-			&& kits.get(kitName).getCooldown() != null
-			&& !kits.get(kitName).getCooldown().isZero()
-		)
+		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass") && !kits.get(kitName).getCooldown().isZero())
 		{
 			if (kitCooldowns.containsKey(player) && kitCooldowns.get(player).containsKey(kitName))
 			{
 				if (!kitCooldowns.get(player).get(kitName).isBefore(Instant.now()))
 					return String.format(
-							"&cStill on cooldown. Time until you can redeem this kit&r: %s",
-							Duration.between(Instant.now(), kitCooldowns.get(player).get(kitName)).toString().replace("PT", "")
+						"&cStill on cooldown. Time until you can redeem this kit&r: %s",
+						TimeFormatter.formatInstant(kitCooldowns.get(player).get(kitName))
 					);
 
 				kitCooldowns.get(player).remove(kitName);
@@ -73,13 +82,20 @@ public class KitHandler implements IServerReady
 			if (!kitCooldowns.containsKey(player))
 				kitCooldowns.put(player, new HashMap<>(0));
 
-			kitCooldowns.get(player).put(kitName, Instant.now().plus(kits.get(kitName).getCooldown()));
+			Instant cooldownEnd = Instant.now().plus(kits.get(kitName).getCooldown());
+			cooldownRepository.setCooldown(player, kitName, cooldownEnd);
+			kitCooldowns.get(player).put(kitName, cooldownEnd);
 		}
 
-		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
-			player.give(item);
+		giveKit(kitName, player);
 
 		return String.format("&aObtained kit&r: %s", kitName);
+	}
+
+	public void giveKit(String kitName, IPlayer player)
+	{
+		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
+			player.give(item);
 	}
 
 	public KitData getKitData(String kitName)
@@ -103,7 +119,8 @@ public class KitHandler implements IServerReady
 	}
 
 	private final KitRepository repository;
+	private final KitCooldownRepository cooldownRepository;
 	private final IServer server;
 	private HashMap<String, KitData> kits = new HashMap<>(0);
-	private final HashMap<IPlayer, HashMap<String, Instant>> kitCooldowns = new HashMap<>(0);
+	private HashMap<IPlayer, HashMap<String, Instant>> kitCooldowns = new HashMap<>(0);
 }

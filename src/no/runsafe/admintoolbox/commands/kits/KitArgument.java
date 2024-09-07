@@ -31,11 +31,8 @@ public class KitArgument extends RequiredArgument implements ITabComplete, IValu
 		if (value == null)
 			return null;
 
-		List<String> kits;
-		if (context instanceof IPlayer)
-			kits = handler.getAvailableKits((IPlayer) context);
-		else
-			kits = handler.getAvailableKits(null);
+		List<String> kits = handler.getAvailableKits(context);
+
 		for (String kit : kits)
 			if (kit.equalsIgnoreCase(value))
 				return value;
