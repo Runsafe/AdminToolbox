@@ -32,7 +32,7 @@ public class KitInfo extends ExecutableCommand
 
 		ArrayList<String> itemList = new ArrayList<>();
 		for (RunsafeMeta item : kit.getInventory().getContents())
-			itemList.add(item.getDisplayName());
+			itemList.add(item.getDisplayName() == null ? item.getNormalName() : item.getDisplayName());
 
 		return "&5KitName: &r" + kitName +
 			", \n&9Universe you can redeem kit in: &r" + (kit.getUniverse() == null ? "Everywhere" : kit.getUniverse()) +
