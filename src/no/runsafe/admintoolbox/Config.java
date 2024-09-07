@@ -17,6 +17,7 @@ public class Config implements IConfigurationChanged
 		Message.Kit.give = config.getConfigValueAsString("message.kit.give");
 		Message.Kit.noneAvailable = config.getConfigValueAsString("message.kit.noneAvailable");
 		Message.Kit.available = config.getConfigValueAsString("message.kit.available");
+		Message.Kit.availableOther = config.getConfigValueAsString("message.kit.availableOther");
 		Message.Kit.availableSeparator = config.getConfigValueAsString("message.kit.availableSeparator");
 		Message.Kit.removeCooldownTime = config.getConfigValueAsString("message.kit.removeCooldownTime");
 		Message.Kit.setCooldownTime = config.getConfigValueAsString("message.kit.setCooldownTime");
@@ -65,6 +66,7 @@ public class Config implements IConfigurationChanged
 			public static String give;
 			public static String noneAvailable;
 			public static String available;
+			public static String availableOther;
 			public static String availableSeparator;
 			public static String removeCooldownTime;
 			public static String setCooldownTime;

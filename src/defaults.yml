@@ -8,6 +8,7 @@ message:
     give: '&eKit &r%s&e given to %s &e.'
     noneAvailable: '&cYou have no available kits.'
     available: '&aAvailable Kits: &f'
+    availableOther: '&aKits available to %s&a: &f'
     availableSeparator: '&r, &f'
     removeCooldownTime: '&aRemoved cooldown timer for kit&r: %s'
     setCooldownTime: '&aSet cooldown timer for kit &r%s&e to &r%s&e.'
