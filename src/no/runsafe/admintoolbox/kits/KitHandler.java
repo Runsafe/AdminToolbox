@@ -6,6 +6,7 @@ import no.runsafe.framework.api.event.IServerReady;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.tools.TimeFormatter;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -72,7 +73,7 @@ public class KitHandler implements IServerReady
 				if (!kitCooldowns.get(player).get(kitName).isBefore(Instant.now()))
 					return String.format(
 						"&cStill on cooldown. Time until you can redeem this kit&r: %s",
-						Duration.between(Instant.now(), kitCooldowns.get(player).get(kitName)).toString().replace("PT", "")
+						TimeFormatter.formatInstant(kitCooldowns.get(player).get(kitName))
 					);
 
 				kitCooldowns.get(player).remove(kitName);

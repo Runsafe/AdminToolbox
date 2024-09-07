@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.Duration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.tools.TimeFormatter;
 
 public class SetCooldownTime extends ExecutableCommand
 {
@@ -34,7 +35,7 @@ public class SetCooldownTime extends ExecutableCommand
 			return String.format("&aRemoved cooldown timer for kit&r: %s", kitName);
 		return String.format(
 			"&aSet cooldown timer for kit %s to %s.",
-			kitName, cooldown.toString().replace("PT", "")
+			kitName, TimeFormatter.formatDuration(cooldown)
 		);
 	}
 

@@ -6,6 +6,7 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.tools.TimeFormatter;
 
 import java.util.regex.Pattern;
 
@@ -38,7 +39,7 @@ public class CreateKit extends PlayerCommand
 
 		return String.format(
 			"&eKit '%s' created with a cooldown time of %s",
-			kitName, cooldown.toString().replace("PT", "")
+			kitName, TimeFormatter.formatDuration(cooldown)
 		);
 	}
 

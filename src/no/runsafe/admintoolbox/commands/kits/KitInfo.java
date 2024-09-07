@@ -6,6 +6,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.tools.TimeFormatter;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class KitInfo extends ExecutableCommand
 			itemList.add(item.getDisplayName());
 
 		return "&5KitName: &r" + kitName +
-			", \n&9Kit cooldown time: &r" + kit.getCooldown().toString().replace("PT", "") +
+			", \n&9Kit cooldown time: &r" + TimeFormatter.formatDuration(kit.getCooldown()) +
 			", \n&9Kit Items: &r" + StringUtils.join(itemList, ", ");
 	}
 
