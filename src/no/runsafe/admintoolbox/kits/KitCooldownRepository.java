@@ -45,7 +45,7 @@ public class KitCooldownRepository extends Repository
 	{
 		HashMap<IPlayer, HashMap<String, Instant>> kitCooldowns = new HashMap<>(0);
 
-		for (IRow row : database.query("SELECT `player`, `kit_name`, `cooldown_end` FROM `toolbox_kits`"))
+		for (IRow row : database.query("SELECT `player`, `kit_name`, `cooldown_end` FROM `toolbox_kitcooldowns`"))
 		{
 			IPlayer player = row.Player("player");
 			String kitName = row.String("kit_name");
