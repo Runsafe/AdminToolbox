@@ -6,14 +6,14 @@ import no.runsafe.admintoolbox.commands.kits.*;
 import no.runsafe.admintoolbox.kits.KitCooldownRepository;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.admintoolbox.kits.KitRepository;
-import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.Database;
 import no.runsafe.framework.features.Events;
 
-public class AdminToolbox extends RunsafePlugin
+public class AdminToolbox extends RunsafeConfigurablePlugin
 {
 	public static IDebug Debugger = null;
 
