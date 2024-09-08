@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -25,7 +26,7 @@ public class Colour extends PlayerCommand
 	{
 		RunsafeItemStack item = executor.getItemInMainHand();
 		if (item == null)
-			return "&cInvalid item.";
+			return Config.Message.playerNotHoldingItem;
 
 		if (item.is(Item.Combat.Leggings.Leather) || item.is(Item.Combat.Boots.Leather) || item.is(Item.Combat.Chestplate.Leather) || item.is(Item.Combat.Helmet.Leather))
 		{
@@ -35,8 +36,8 @@ public class Colour extends PlayerCommand
 				((RunsafeLeatherArmor) item).RandomColour();
 			else
 				armor.setColor(Integer.valueOf(hex, 16));
-			return "&2Coloured!";
+			return Config.Message.colour.setSucceed;
 		}
-		return "&cYou cannot colour that item.";
+		return Config.Message.colour.setFail;
 	}
 }

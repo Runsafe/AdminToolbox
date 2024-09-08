@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -32,9 +33,9 @@ public class SetCooldownTime extends ExecutableCommand
 		handler.changeKitCooldown(kitName, cooldown);
 
 		if (cooldown.isZero())
-			return String.format("&aRemoved cooldown timer for kit&r: %s", kitName);
+			return String.format(Config.Message.Kit.removeCooldownTime, kitName);
 		return String.format(
-			"&aSet cooldown timer for kit %s to %s.",
+				Config.Message.Kit.setCooldownTime,
 			kitName, TimeFormatter.formatDuration(cooldown)
 		);
 	}

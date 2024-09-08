@@ -27,9 +27,9 @@ public class KitCooldownRepository extends Repository
 
 		updates.addQueries(
 			"CREATE TABLE `toolbox_kitcooldowns` (" +
-				"`player` varchar(36) NOT NULL, " +
+				"`player` VARCHAR(36) NOT NULL, " +
 				"`kit_name` VARCHAR(20) NOT NULL, " +
-				"`cooldown_end` datetime NOT NULL " +
+				"`cooldown_end` datetime NOT NULL, " +
 				"PRIMARY KEY (`player`, `kit_name`)" +
 			");"
 		);

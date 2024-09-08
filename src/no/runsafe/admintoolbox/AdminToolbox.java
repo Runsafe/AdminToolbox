@@ -7,7 +7,6 @@ import no.runsafe.admintoolbox.kits.KitCooldownRepository;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.admintoolbox.kits.KitRepository;
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
@@ -26,6 +25,8 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(Database.class);
 
 		Debugger = getComponent(IDebug.class);
+
+		addComponent(Config.class);
 
 		addComponent(BindingHandler.class);
 
@@ -51,6 +52,7 @@ public class AdminToolbox extends RunsafePlugin
 		kitCommand.addSubCommand(getInstance(DeleteKit.class));
 		kitCommand.addSubCommand(getInstance(GiveKit.class));
 		kitCommand.addSubCommand(getInstance(ListKits.class));
+		kitCommand.addSubCommand(getInstance(ListOther.class));
 		kitCommand.addSubCommand(getInstance(SetCooldownTime.class));
 		kitCommand.addSubCommand(getInstance(KitInfo.class));
 		kitCommand.addSubCommand(getInstance(SetUniverse.class));

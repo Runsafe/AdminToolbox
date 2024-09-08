@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -25,9 +26,9 @@ public class ListKits extends ExecutableCommand
 	{
 		List<String> kits = handler.getAvailableKits(executor);
 		if (kits.isEmpty())
-			return "&cYou have no available kits.";
+			return Config.Message.Kit.noneAvailable;
 
-		return "&aAvailable Kits: &f" + StringUtils.join(kits, "&r, &f");
+		return Config.Message.Kit.available + StringUtils.join(kits, Config.Message.Kit.availableSeparator);
 	}
 
 	private final KitHandler handler;

@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -28,9 +29,9 @@ public class SetUniverse extends ExecutableCommand
 		handler.setKitUniverse(kitName, universeName);
 
 		if (universeName == null)
-			return String.format("&aRemoved universe requirement for kit &r%s", kitName);
+			return String.format(Config.Message.Kit.removeUniverse, kitName);
 
-		return String.format("&aSet universe for kit &r%s&a to &r%s", kitName, universeName);
+		return String.format(Config.Message.Kit.setUniverse, kitName, universeName);
 	}
 
 	private final KitHandler handler;

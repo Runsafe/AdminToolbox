@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.kits;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.event.IServerReady;
@@ -71,7 +72,7 @@ public class KitHandler implements IServerReady
 	public String getKit(String kitName, IPlayer player)
 	{
 		if (!kits.containsKey(kitName))
-			return "&cThat kit does not exist.";
+			return Config.Message.Kit.getNotExist;
 
 		// Check universe
 		String kitUniverse = kits.get(kitName).getUniverse();
@@ -79,7 +80,7 @@ public class KitHandler implements IServerReady
 			&& !player.hasPermission("runsafe.toolbox.kits.ignoreuniverse")
 			&& !player.getUniverse().getName().equals(kitUniverse)
 		)
-			return String.format("&cYou have to be in &r%s&c to redeem this kit.", kitUniverse);
+			return String.format(Config.Message.Kit.getWrongWorld, kitUniverse);
 
 		// Check cooldown
 		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass") && !kits.get(kitName).getCooldown().isZero())
@@ -88,7 +89,7 @@ public class KitHandler implements IServerReady
 			{
 				if (!kitCooldowns.get(player).get(kitName).isBefore(Instant.now()))
 					return String.format(
-						"&cStill on cooldown. Time until you can redeem this kit&r: %s",
+						Config.Message.Kit.getOnCooldown,
 						TimeFormatter.formatInstant(kitCooldowns.get(player).get(kitName))
 					);
 
@@ -105,7 +106,7 @@ public class KitHandler implements IServerReady
 
 		giveKit(kitName, player);
 
-		return String.format("&aObtained kit&r: %s", kitName);
+		return String.format(Config.Message.Kit.getSucceed, kitName);
 	}
 
 	public void giveKit(String kitName, IPlayer player)

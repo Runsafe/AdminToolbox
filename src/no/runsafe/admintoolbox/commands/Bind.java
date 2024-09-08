@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.admintoolbox.binding.BindingHandler;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
@@ -27,7 +28,7 @@ public class Bind extends PlayerCommand
 		RunsafeMeta handItem = executor.getItemInMainHand();
 
 		if (handItem == null)
-			return "&cYou need to bind to an item";
+			return Config.Message.playerNotHoldingItem;
 
 		Item itemType = handItem.getItemType();
 		String commandString = parameters.getValue("commands");
@@ -35,11 +36,11 @@ public class Bind extends PlayerCommand
 		if (commandString == null || commandString.equalsIgnoreCase("none"))
 		{
 			handler.removeBinding(executor, itemType);
-			return "&aTool unbound.";
+			return Config.Message.bind.setUnbind;
 		}
 
 		handler.addBinding(executor, itemType, commandString.split("\\\\"));
-		return "&aBound!";
+		return Config.Message.bind.setSucceed;
 	}
 
 	private final BindingHandler handler;
