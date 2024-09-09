@@ -25,7 +25,7 @@ public class Colour extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		RunsafeItemStack item = executor.getItemInMainHand();
-		if (item == null)
+		if (item == null || item.is(Item.Unavailable.Air))
 			return Config.Message.playerNotHoldingItem;
 
 		if (item.is(Item.Combat.Leggings.Leather) || item.is(Item.Combat.Boots.Leather) || item.is(Item.Combat.Chestplate.Leather) || item.is(Item.Combat.Helmet.Leather))

@@ -27,7 +27,7 @@ public class Bind extends PlayerCommand
 	{
 		RunsafeMeta handItem = executor.getItemInMainHand();
 
-		if (handItem == null)
+		if (handItem == null || handItem.is(Item.Unavailable.Air))
 			return Config.Message.playerNotHoldingItem;
 
 		Item itemType = handItem.getItemType();
