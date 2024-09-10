@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 public class BindPermanent extends PlayerCommand
@@ -24,7 +25,7 @@ public class BindPermanent extends PlayerCommand
 	{
 		RunsafeMeta handItem = executor.getItemInMainHand();
 
-		if (handItem == null)
+		if (handItem == null || handItem.is(Item.Unavailable.Air))
 			return Config.Message.playerNotHoldingItem;
 
 		String commandString = parameters.getValue("commands");

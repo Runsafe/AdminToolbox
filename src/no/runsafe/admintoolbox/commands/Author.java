@@ -26,7 +26,7 @@ public class Author extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		RunsafeItemStack item = executor.getItemInMainHand();
-		if (item == null)
+		if (item == null || item.is(Item.Unavailable.Air))
 			return Config.Message.playerNotHoldingItem;
 
 		if (item.is(Item.Special.Crafted.WrittenBook))

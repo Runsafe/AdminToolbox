@@ -17,9 +17,9 @@ public class ListOther extends ExecutableCommand
 	{
 		super(
 			"listother",
-			"List all kits available to a specific person",
+			"List all kits available to a specific online player",
 			"runsafe.toolbox.kits.list.other",
-			new Player().defaultToExecutor()
+			new Player().onlineOnly().require()
 		);
 		this.handler = handler;
 	}
@@ -27,14 +27,13 @@ public class ListOther extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IPlayer target = parameters.getValue("player");
-		String targetName = target == null ? "Console" : target.getPrettyName();
+		IPlayer target = parameters.getRequired("player");
 
 		List<String> kits = handler.getAvailableKits(target);
 		if (kits.isEmpty())
 			return Config.Message.Kit.noneAvailable;
 
-		return String.format(Config.Message.Kit.availableOther, targetName) +
+		return String.format(Config.Message.Kit.availableOther, target.getPrettyName()) +
 			StringUtils.join(kits, Config.Message.Kit.availableSeparator);
 	}
 
