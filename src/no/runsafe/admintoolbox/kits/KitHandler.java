@@ -42,7 +42,7 @@ public class KitHandler implements IServerReady, IInventoryClosed
 
 	public void createKit(String kitName, String universeName, Duration cooldown)
 	{
-		RunsafeInventory inventory = server.createInventory(null, 36);
+		RunsafeInventory inventory = server.createInventory(null, 36, "Kit: " + kitName);
 		KitData kit = new KitData(kitName, inventory, universeName, cooldown);
 		kits.put(kitName, kit);
 		repository.saveKit(kit);
@@ -139,7 +139,7 @@ public class KitHandler implements IServerReady, IInventoryClosed
 		if (inventoryEdits.containsKey(player) || inventoryEdits.containsValue(kitName))
 			return String.format(Config.Message.Kit.inventoryEditFailConcurrent, kitName, player.getPrettyName());
 
-		player.openInventory(server.createInventory(null, 36, "Kit: " + kitName));
+		player.openInventory(kits.get(kitName).getInventory());
 		inventoryEdits.put(player, kitName);
 		return null;
 	}
