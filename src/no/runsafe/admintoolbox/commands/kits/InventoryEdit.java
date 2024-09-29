@@ -10,10 +10,10 @@ public class InventoryEdit extends PlayerCommand
 	public InventoryEdit(KitHandler handler)
 	{
 		super(
-				"inventoryedit",
-				"Change a kit's inventory",
-				"runsafe.toolbox.kits.inventoryedit",
-				new KitArgument(handler)
+			"inventoryedit",
+			"Change a kit's inventory",
+			"runsafe.toolbox.kits.inventoryedit",
+			new KitArgument(handler)
 		);
 		this.handler = handler;
 	}
