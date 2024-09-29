@@ -36,14 +36,16 @@ public class CreateKit extends PlayerCommand
 		if (cooldown == null)
 			cooldown = java.time.Duration.ZERO;
 
-		handler.createKit(kitName, executor, universeName, cooldown);
+		handler.createKit(kitName, universeName, cooldown);
 		if (universeName == null)
-			return String.format(Config.Message.Kit.created, kitName);
+			executor.sendColouredMessage(Config.Message.Kit.created, kitName);
+		else
+			executor.sendColouredMessage(
+				Config.Message.Kit.created2,
+				kitName, universeName, TimeFormatter.formatDuration(cooldown)
+			);
 
-		return String.format(
-			Config.Message.Kit.created2,
-			kitName, universeName, TimeFormatter.formatDuration(cooldown)
-		);
+		return handler.editKitInventory(executor, kitName);
 	}
 
 	private final KitHandler handler;

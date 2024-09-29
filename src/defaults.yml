@@ -18,6 +18,9 @@ message:
     getWrongWorld: '&cYou have to be in &r%s&c to redeem this kit.'
     getOnCooldown: '&cStill on cooldown. Time until you can redeem this kit&r: %s'
     getSucceed: '&aObtained kit&r: %s'
+    inventoryEditFailConcurrent: '&cCould not set kit inventory for kit: %s. Stopped by player: %s'
+    inventoryEditFailNonExistent: '&cCould not save inventory for kit %s. Kit does not exist.'
+    inventoryEditSucceed: '&aInventory set for kit: %s'
   lore:
     addSucceed: '&eLore text added.'
     removeSucceed: '&eLore text cleared.'

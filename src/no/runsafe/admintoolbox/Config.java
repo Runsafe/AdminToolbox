@@ -27,6 +27,9 @@ public class Config implements IConfigurationChanged
 		Message.Kit.getWrongWorld = config.getConfigValueAsString("message.kit.getWrongWorld");
 		Message.Kit.getOnCooldown = config.getConfigValueAsString("message.kit.getOnCooldown");
 		Message.Kit.getSucceed = config.getConfigValueAsString("message.kit.getSucceed");
+		Message.Kit.inventoryEditFailConcurrent = config.getConfigValueAsString("message.kit.inventoryEditConcurrent");
+		Message.Kit.inventoryEditFailNonExistent = config.getConfigValueAsString("message.kit.inventoryEditNonExistent");
+		Message.Kit.inventoryEditSucceed = config.getConfigValueAsString("message.kit.inventoryEditSucceed");
 
 		Message.lore.addSucceed = config.getConfigValueAsString("message.lore.addSucceed");
 		Message.lore.removeSucceed = config.getConfigValueAsString("message.lore.removeSucceed");
@@ -76,6 +79,9 @@ public class Config implements IConfigurationChanged
 			public static String getWrongWorld;
 			public static String getOnCooldown;
 			public static String getSucceed;
+			public static String inventoryEditFailConcurrent;
+			public static String inventoryEditFailNonExistent;
+			public static String inventoryEditSucceed;
 		}
 
 		public static final class lore
