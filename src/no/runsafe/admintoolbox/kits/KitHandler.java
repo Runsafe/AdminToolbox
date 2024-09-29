@@ -137,7 +137,7 @@ public class KitHandler implements IServerReady, IInventoryClosed
 	public String editKitInventory(IPlayer player, String kitName)
 	{
 		if (inventoryEdits.containsKey(player) || inventoryEdits.containsValue(kitName))
-			return String.format(Config.Message.Kit.inventoryEditFailConcurrent, kitName, player.getPrettyName());
+			return String.format(Config.Message.Kit.inventoryEditFailConcurrent, kitName);
 
 		player.openInventory(kits.get(kitName).getInventory());
 		inventoryEdits.put(player, kitName);

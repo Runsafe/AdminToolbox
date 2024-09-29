@@ -27,8 +27,8 @@ public class Config implements IConfigurationChanged
 		Message.Kit.getWrongWorld = config.getConfigValueAsString("message.kit.getWrongWorld");
 		Message.Kit.getOnCooldown = config.getConfigValueAsString("message.kit.getOnCooldown");
 		Message.Kit.getSucceed = config.getConfigValueAsString("message.kit.getSucceed");
-		Message.Kit.inventoryEditFailConcurrent = config.getConfigValueAsString("message.kit.inventoryEditConcurrent");
-		Message.Kit.inventoryEditFailNonExistent = config.getConfigValueAsString("message.kit.inventoryEditNonExistent");
+		Message.Kit.inventoryEditFailConcurrent = config.getConfigValueAsString("message.kit.inventoryEditFailConcurrent");
+		Message.Kit.inventoryEditFailNonExistent = config.getConfigValueAsString("message.kit.inventoryEditFailNonExistent");
 		Message.Kit.inventoryEditSucceed = config.getConfigValueAsString("message.kit.inventoryEditSucceed");
 
 		Message.lore.addSucceed = config.getConfigValueAsString("message.lore.addSucceed");
