@@ -152,6 +152,8 @@ public class KitHandler implements IServerReady, IInventoryClosed
 			return;
 
 		String kitName = inventoryEdits.get(player);
+		inventoryEdits.remove(player);
+
 		KitData kit = kits.get(kitName);
 		if (kit == null)
 		{
