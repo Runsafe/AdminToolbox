@@ -43,9 +43,9 @@ public class KitRepository extends Repository
 
 		for (IRow row : database.query("SELECT `ID`, `inventory`, `universe`, `cooldown_time` FROM `toolbox_kits`"))
 		{
-			RunsafeInventory inventory = server.createInventory(null, 36);
-			inventory.unserialize(row.String("inventory"));
 			String kitName = row.String("ID");
+			RunsafeInventory inventory = server.createInventory(null, 36, "Kit: " + kitName);
+			inventory.unserialize(row.String("inventory"));
 			kits.put(kitName, new KitData(kitName, inventory, row.String("universe"), row.Duration("cooldown_time")));
 		}
 

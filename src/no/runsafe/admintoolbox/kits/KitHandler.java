@@ -4,18 +4,18 @@ import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.event.IServerReady;
+import no.runsafe.framework.api.event.inventory.IInventoryClosed;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.minecraft.event.inventory.RunsafeInventoryCloseEvent;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.tools.TimeFormatter;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-public class KitHandler implements IServerReady
+public class KitHandler implements IServerReady, IInventoryClosed
 {
 	public KitHandler(KitRepository repository, KitCooldownRepository cooldownRepository, IServer server)
 	{
@@ -40,10 +40,9 @@ public class KitHandler implements IServerReady
 		kitCooldowns = cooldownRepository.getKitCooldowns();
 	}
 
-	public void createKit(String kitName, IPlayer player, String universeName, Duration cooldown)
+	public void createKit(String kitName, String universeName, Duration cooldown)
 	{
-		RunsafeInventory inventory = server.createInventory(null, 36);
-		inventory.unserialize(player.getInventory().serialize());
+		RunsafeInventory inventory = server.createInventory(null, 36, "Kit: " + kitName);
 		KitData kit = new KitData(kitName, inventory, universeName, cooldown);
 		kits.put(kitName, kit);
 		repository.saveKit(kit);
@@ -135,9 +134,44 @@ public class KitHandler implements IServerReady
 		return player == null || player.hasPermission("runsafe.toolbox.kits.get." + kitName);
 	}
 
+	public String editKitInventory(IPlayer player, String kitName)
+	{
+		if (inventoryEdits.containsKey(player) || inventoryEdits.containsValue(kitName))
+			return String.format(Config.Message.Kit.inventoryEditFailConcurrent, kitName, player.getPrettyName());
+
+		player.openInventory(kits.get(kitName).getInventory());
+		inventoryEdits.put(player, kitName);
+		return null;
+	}
+
+	@Override
+	public void OnInventoryClosed(RunsafeInventoryCloseEvent event)
+	{
+		IPlayer player = event.getPlayer();
+		if (!inventoryEdits.containsKey(player))
+			return;
+
+		String kitName = inventoryEdits.get(player);
+		inventoryEdits.remove(player);
+
+		KitData kit = kits.get(kitName);
+		if (kit == null)
+		{
+			player.sendColouredMessage(Config.Message.Kit.inventoryEditFailNonExistent, kitName);
+			return;
+		}
+
+		RunsafeInventory newInventory = event.getInventory();
+		kit.setInventory(newInventory);
+		repository.saveKit(kit);
+
+		player.sendColouredMessage(Config.Message.Kit.inventoryEditSucceed, kitName);
+	}
+
 	private final KitRepository repository;
 	private final KitCooldownRepository cooldownRepository;
 	private final IServer server;
 	private HashMap<String, KitData> kits = new HashMap<>(0);
 	private HashMap<IPlayer, HashMap<String, Instant>> kitCooldowns = new HashMap<>(0);
+	private final HashMap<IPlayer, String> inventoryEdits = new HashMap<>(0);
 }
