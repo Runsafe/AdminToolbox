@@ -83,7 +83,7 @@ public class KitHandler implements IServerReady, IInventoryClosed
 
 		// Check if they have enough inventory space
 		int requiredEmptySpaces = kits.get(kitName).getInventory().getContents().size();
-		int emptyInventorySpaces = player.getInventory().getContents().size();
+		int emptyInventorySpaces = 36 - player.getInventory().getContents().size();
 
 		if (emptyInventorySpaces < requiredEmptySpaces)
 			return String.format(Config.Message.Kit.getInventoryFull, requiredEmptySpaces);
