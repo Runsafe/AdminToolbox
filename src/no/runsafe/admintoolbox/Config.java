@@ -26,9 +26,10 @@ public class Config implements IConfigurationChanged
 		Message.Kit.getNotExist = config.getConfigValueAsString("message.kit.getNotExist");
 		Message.Kit.getWrongWorld = config.getConfigValueAsString("message.kit.getWrongWorld");
 		Message.Kit.getOnCooldown = config.getConfigValueAsString("message.kit.getOnCooldown");
+		Message.Kit.getInventoryFull = config.getConfigValueAsString("message.kit.getInventoryFull");
 		Message.Kit.getSucceed = config.getConfigValueAsString("message.kit.getSucceed");
-		Message.Kit.inventoryEditFailConcurrent = config.getConfigValueAsString("message.kit.inventoryEditConcurrent");
-		Message.Kit.inventoryEditFailNonExistent = config.getConfigValueAsString("message.kit.inventoryEditNonExistent");
+		Message.Kit.inventoryEditFailConcurrent = config.getConfigValueAsString("message.kit.inventoryEditFailConcurrent");
+		Message.Kit.inventoryEditFailNonExistent = config.getConfigValueAsString("message.kit.inventoryEditFailNonExistent");
 		Message.Kit.inventoryEditSucceed = config.getConfigValueAsString("message.kit.inventoryEditSucceed");
 
 		Message.lore.addSucceed = config.getConfigValueAsString("message.lore.addSucceed");
@@ -78,6 +79,7 @@ public class Config implements IConfigurationChanged
 			public static String getNotExist;
 			public static String getWrongWorld;
 			public static String getOnCooldown;
+			public static String getInventoryFull;
 			public static String getSucceed;
 			public static String inventoryEditFailConcurrent;
 			public static String inventoryEditFailNonExistent;

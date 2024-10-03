@@ -17,8 +17,9 @@ message:
     getNotExist: '&cThat kit does not exist.'
     getWrongWorld: '&cYou have to be in &r%s&c to redeem this kit.'
     getOnCooldown: '&cStill on cooldown. Time until you can redeem this kit&r: %s'
+    getInventoryFull: '&cYour inventory is too full. Make sure you have at least %d empty slots.'
     getSucceed: '&aObtained kit&r: %s'
-    inventoryEditFailConcurrent: '&cCould not set kit inventory for kit: %s. Stopped by player: %s'
+    inventoryEditFailConcurrent: '&cCould not set kit inventory for kit: %s. Currently being edited.'
     inventoryEditFailNonExistent: '&cCould not save inventory for kit %s. Kit does not exist.'
     inventoryEditSucceed: '&aInventory set for kit: %s'
   lore:
