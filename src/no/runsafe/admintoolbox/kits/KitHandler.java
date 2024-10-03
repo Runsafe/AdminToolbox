@@ -81,6 +81,13 @@ public class KitHandler implements IServerReady, IInventoryClosed
 		)
 			return String.format(Config.Message.Kit.getWrongWorld, kitUniverse);
 
+		// Check if they have enough inventory space
+		int requiredEmptySpaces = kits.get(kitName).getInventory().getContents().size();
+		int emptyInventorySpaces = player.getInventory().getContents().size();
+
+		if (emptyInventorySpaces < requiredEmptySpaces)
+			return String.format(Config.Message.Kit.getInventoryFull, requiredEmptySpaces);
+
 		// Check cooldown
 		if (!player.hasPermission("runsafe.toolbox.kits.cooldownbypass") && !kits.get(kitName).getCooldown().isZero())
 		{
