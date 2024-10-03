@@ -117,8 +117,12 @@ public class KitHandler implements IServerReady, IInventoryClosed
 
 	public void giveKit(String kitName, IPlayer player)
 	{
+		RunsafeInventory playerInventory = player.getInventory();
 		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
-			player.give(item);
+			if (playerInventory.getContents().size() < playerInventory.getSize())
+				player.give(item);
+			else
+				player.getWorld().dropItem(player.getLocation(), item);
 	}
 
 	public KitData getKitData(String kitName)
