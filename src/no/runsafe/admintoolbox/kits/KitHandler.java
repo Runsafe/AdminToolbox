@@ -83,9 +83,8 @@ public class KitHandler implements IServerReady, IInventoryClosed
 
 		// Check if they have enough inventory space
 		int requiredEmptySpaces = kits.get(kitName).getInventory().getContents().size();
-		int emptyInventorySpaces = 36 - player.getInventory().getContents().size();
 
-		if (emptyInventorySpaces < requiredEmptySpaces)
+		if (player.getInventoryFreeSpaces() < requiredEmptySpaces)
 			return String.format(Config.Message.Kit.getInventoryFull, requiredEmptySpaces);
 
 		// Check cooldown
@@ -117,9 +116,8 @@ public class KitHandler implements IServerReady, IInventoryClosed
 
 	public void giveKit(String kitName, IPlayer player)
 	{
-		RunsafeInventory playerInventory = player.getInventory();
 		for (RunsafeMeta item : kits.get(kitName).getInventory().getContents())
-			if (playerInventory.getContents().size() < playerInventory.getSize())
+			if (player.getInventoryFreeSpaces() > 0)
 				player.give(item);
 			else
 				player.getWorld().dropItem(player.getLocation(), item);
