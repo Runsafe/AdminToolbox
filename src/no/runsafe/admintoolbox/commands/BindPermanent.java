@@ -1,9 +1,11 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 public class BindPermanent extends PlayerCommand
@@ -23,11 +25,11 @@ public class BindPermanent extends PlayerCommand
 	{
 		RunsafeMeta handItem = executor.getItemInMainHand();
 
-		if (handItem == null)
-			return "&cYou need to bind to an item";
+		if (handItem == null || handItem.is(Item.Unavailable.Air))
+			return Config.Message.playerNotHoldingItem;
 
 		String commandString = parameters.getValue("commands");
 		handItem.setTagCompound("runsafe.bound-commands", commandString);
-		return "&aBound!";
+		return Config.Message.bind.setSucceed;
 	}
 }

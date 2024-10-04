@@ -27,24 +27,26 @@ public class KitRepository extends Repository
 		database.execute("DELETE FROM `toolbox_kits` WHERE `ID` = ?", name);
 	}
 
-	public void saveKit(String name, RunsafeInventory kit)
+	public void saveKit(KitData kit)
 	{
-		String inventory = kit.serialize();
 		database.execute(
-				"INSERT INTO `toolbox_kits` (`ID`, `inventory`) VALUES(?, ?) ON DUPLICATE KEY UPDATE `inventory` = ?",
-				name, inventory, inventory
+			"INSERT INTO `toolbox_kits` (`ID`, `inventory`, `universe`, `cooldown_time`) VALUES(?, ?, ?, ?) " +
+				"ON DUPLICATE KEY UPDATE `inventory` = VALUES(`inventory`), `universe` = VALUES(`universe`), " +
+				"`cooldown_time` = VALUES(`cooldown_time`)",
+			kit.getKitName(), kit.getInventory().serialize(), kit.getUniverse(), kit.getCooldown().toString()
 		);
 	}
 
-	public HashMap<String, RunsafeInventory> getKits()
+	public HashMap<String, KitData> getKits()
 	{
-		HashMap<String, RunsafeInventory> kits = new HashMap<>(0);
+		HashMap<String, KitData> kits = new HashMap<>(0);
 
-		for (IRow row : database.query("SELECT `ID`, `inventory` FROM `toolbox_kits`"))
+		for (IRow row : database.query("SELECT `ID`, `inventory`, `universe`, `cooldown_time` FROM `toolbox_kits`"))
 		{
-			RunsafeInventory inventory = server.createInventory(null, 36);
+			String kitName = row.String("ID");
+			RunsafeInventory inventory = server.createInventory(null, 36, "Kit: " + kitName);
 			inventory.unserialize(row.String("inventory"));
-			kits.put(row.String("ID"), inventory);
+			kits.put(kitName, new KitData(kitName, inventory, row.String("universe"), row.Duration("cooldown_time")));
 		}
 
 		return kits;
@@ -62,6 +64,11 @@ public class KitRepository extends Repository
 				"`inventory` LONGTEXT NOT NULL," +
 				"PRIMARY KEY (`ID`)" +
 			")"
+		);
+
+		updates.addQueries(
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `universe` VARCHAR(32) NULL AFTER `inventory`;",
+			"ALTER TABLE `toolbox_kits` ADD COLUMN `cooldown_time` VARCHAR(32) NOT NULL DEFAULT 'PT0S' AFTER `universe`;"
 		);
 
 		return updates;

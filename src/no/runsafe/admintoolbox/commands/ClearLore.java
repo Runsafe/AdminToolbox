@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
@@ -24,8 +25,8 @@ public class ClearLore extends PlayerCommand
 		if (item != null && !item.is(Item.Unavailable.Air))
 		{
 			item.clearLore();
-			return "&eLore text cleared.";
+			return Config.Message.lore.removeSucceed;
 		}
-		return "&cInvalid item in hand.";
+		return Config.Message.playerNotHoldingItem;
 	}
 }

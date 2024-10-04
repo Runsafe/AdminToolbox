@@ -3,16 +3,17 @@ package no.runsafe.admintoolbox;
 import no.runsafe.admintoolbox.binding.BindingHandler;
 import no.runsafe.admintoolbox.commands.*;
 import no.runsafe.admintoolbox.commands.kits.*;
+import no.runsafe.admintoolbox.kits.KitCooldownRepository;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.admintoolbox.kits.KitRepository;
-import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.Database;
 import no.runsafe.framework.features.Events;
 
-public class AdminToolbox extends RunsafePlugin
+public class AdminToolbox extends RunsafeConfigurablePlugin
 {
 	public static IDebug Debugger = null;
 
@@ -24,6 +25,8 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(Database.class);
 
 		Debugger = getComponent(IDebug.class);
+
+		addComponent(Config.class);
 
 		addComponent(BindingHandler.class);
 
@@ -39,6 +42,7 @@ public class AdminToolbox extends RunsafePlugin
 		addComponent(Repair.class);
 
 		addComponent(KitRepository.class);
+		addComponent(KitCooldownRepository.class);
 		addComponent(KitHandler.class);
 		Command kitCommand = new Command("kit", "Kit related commands", null);
 		addComponent(kitCommand);
@@ -48,5 +52,10 @@ public class AdminToolbox extends RunsafePlugin
 		kitCommand.addSubCommand(getInstance(DeleteKit.class));
 		kitCommand.addSubCommand(getInstance(GiveKit.class));
 		kitCommand.addSubCommand(getInstance(ListKits.class));
+		kitCommand.addSubCommand(getInstance(ListOther.class));
+		kitCommand.addSubCommand(getInstance(SetCooldownTime.class));
+		kitCommand.addSubCommand(getInstance(KitInfo.class));
+		kitCommand.addSubCommand(getInstance(SetUniverse.class));
+		kitCommand.addSubCommand(getInstance(InventoryEdit.class));
 	}
 }

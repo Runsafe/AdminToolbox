@@ -5,14 +5,14 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
-public class GetKit extends PlayerCommand
+public class InventoryEdit extends PlayerCommand
 {
-	public GetKit(KitHandler handler)
+	public InventoryEdit(KitHandler handler)
 	{
 		super(
-			"get",
-			"Get a kit",
-			"runsafe.toolbox.kits.get",
+			"inventoryedit",
+			"Change a kit's inventory",
+			"runsafe.toolbox.kits.inventoryedit",
 			new KitArgument(handler)
 		);
 		this.handler = handler;
@@ -21,9 +21,7 @@ public class GetKit extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String kitName = parameters.getValue("kit");
-
-		return handler.getKit(kitName, executor);
+		return handler.editKitInventory(executor, parameters.getRequired("kit"));
 	}
 
 	private final KitHandler handler;

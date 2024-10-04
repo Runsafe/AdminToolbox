@@ -7,16 +7,18 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.player.IPlayer;
+import org.apache.commons.lang.StringUtils;
 
-public class GiveKit extends ExecutableCommand
+import java.util.List;
+
+public class ListOther extends ExecutableCommand
 {
-	public GiveKit(KitHandler handler)
+	public ListOther(KitHandler handler)
 	{
 		super(
-			"give",
-			"Give a kit to another player",
-			"runsafe.toolbox.kits.give",
-			new KitArgument(handler),
+			"listother",
+			"List all kits available to a specific online player",
+			"runsafe.toolbox.kits.list.other",
 			new Player().onlineOnly().require()
 		);
 		this.handler = handler;
@@ -25,11 +27,14 @@ public class GiveKit extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		String kitName = parameters.getValue("kit");
-		IPlayer targetPlayer = parameters.getRequired("player");
+		IPlayer target = parameters.getRequired("player");
 
-		handler.giveKit(kitName, targetPlayer);
-		return String.format(Config.Message.Kit.give, kitName, targetPlayer.getPrettyName());
+		List<String> kits = handler.getAvailableKits(target);
+		if (kits.isEmpty())
+			return Config.Message.Kit.noneAvailable;
+
+		return String.format(Config.Message.Kit.availableOther, target.getPrettyName()) +
+			StringUtils.join(kits, Config.Message.Kit.availableSeparator);
 	}
 
 	private final KitHandler handler;

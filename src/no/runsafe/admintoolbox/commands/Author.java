@@ -1,5 +1,6 @@
 package no.runsafe.admintoolbox.commands;
 
+import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -25,12 +26,15 @@ public class Author extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		RunsafeItemStack item = executor.getItemInMainHand();
-		if (item != null && item.is(Item.Special.Crafted.WrittenBook))
+		if (item == null || item.is(Item.Unavailable.Air))
+			return Config.Message.playerNotHoldingItem;
+
+		if (item.is(Item.Special.Crafted.WrittenBook))
 		{
 			String author = ChatColour.ToMinecraft(parameters.getValue("author"));
 			((RunsafeBook) item).setAuthor(author);
-			return "&2Author changed to " + author;
+			return String.format(Config.Message.author.setSucceed, author);
 		}
-		return "&cYou cannot change the author of that item.";
+		return Config.Message.author.setFail;
 	}
 }
