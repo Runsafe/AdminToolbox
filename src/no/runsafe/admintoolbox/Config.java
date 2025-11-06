@@ -2,6 +2,10 @@ package no.runsafe.admintoolbox;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.player.IPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Config implements IConfigurationChanged
 {
@@ -9,6 +13,7 @@ public class Config implements IConfigurationChanged
 	public void OnConfigurationChanged(IConfiguration config)
 	{
 		Message.playerNotHoldingItem = config.getConfigValueAsString("message.playerNotHoldingItem");
+		Message.elytraFail = config.getConfigValueAsString("message.elytraFail");
 
 		Message.Kit.invalidName = config.getConfigValueAsString("message.kit.invalidName");
 		Message.Kit.created = config.getConfigValueAsString("message.kit.created");
@@ -55,11 +60,15 @@ public class Config implements IConfigurationChanged
 		Message.renameItem.succeed = config.getConfigValueAsString("message.renameItem.succeed");
 
 		Message.repair.succeed = config.getConfigValueAsString("message.repair.succeed");
+
+		worldNames.clear();
+		worldNames.addAll(config.getConfigValueAsList("antiElytraFlightWorlds"));
 	}
 
 	public static final class Message
 	{
 		public static String playerNotHoldingItem;
+		public static String elytraFail;
 
 		public static final class Kit
 		{
@@ -134,4 +143,14 @@ public class Config implements IConfigurationChanged
 			public static String succeed;
 		}
 	}
+
+	public static boolean canElytraFly(IPlayer player)
+	{
+		if (player == null)
+			return false;
+
+		return !worldNames.contains(player.getWorldName());
+	}
+
+	private static final List<String> worldNames = new ArrayList<>(0);
 }
