@@ -20,6 +20,7 @@ public class EntityToggleGlideEvent implements IEntityToggleGlideEvent
 		if (Config.canElytraFly(player))
 			return true;
 
+		player.setGliding(false);
 		player.sendColouredMessage(Config.Message.elytraFail);
 		event.cancel();
 		return false;
