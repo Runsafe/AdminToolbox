@@ -21,6 +21,7 @@ public class EntityToggleGlideEvent implements IEntityToggleGlideEvent
 			return true;
 
 		player.sendColouredMessage(Config.Message.elytraFail);
+		event.cancel();
 		return false;
 	}
 }
