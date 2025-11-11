@@ -4,6 +4,8 @@ import no.runsafe.admintoolbox.Config;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.event.player.IPlayerMove;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.minecraft.Item;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 public class PlayerMove implements IPlayerMove
 {
@@ -16,6 +18,13 @@ public class PlayerMove implements IPlayerMove
 		player.setGliding(false);
 		player.sendColouredMessage(Config.Message.elytraFail);
 
-		return false;
+		RunsafeMeta chestplate = player.getChestplate();
+		if (chestplate != null && chestplate.is(Item.Transportation.Elytra))
+		{
+			chestplate.setDurability((short) (chestplate.getDurability() + 50));
+			player.setChestplate(chestplate);
+		}
+
+		return true;
 	}
 }
