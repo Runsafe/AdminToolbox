@@ -3,6 +3,7 @@ package no.runsafe.admintoolbox;
 import no.runsafe.admintoolbox.binding.BindingHandler;
 import no.runsafe.admintoolbox.commands.*;
 import no.runsafe.admintoolbox.commands.kits.*;
+import no.runsafe.admintoolbox.events.PlayerMove;
 import no.runsafe.admintoolbox.kits.KitCooldownRepository;
 import no.runsafe.admintoolbox.kits.KitHandler;
 import no.runsafe.admintoolbox.kits.KitRepository;
@@ -57,5 +58,7 @@ public class AdminToolbox extends RunsafeConfigurablePlugin
 		kitCommand.addSubCommand(getInstance(KitInfo.class));
 		kitCommand.addSubCommand(getInstance(SetUniverse.class));
 		kitCommand.addSubCommand(getInstance(InventoryEdit.class));
+
+		addComponent(PlayerMove.class);
 	}
 }
